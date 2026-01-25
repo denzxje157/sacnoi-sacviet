@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+const BASE_URL = import.meta.env.BASE_URL || "/";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-text-main text-white pt-24 pb-12 px-6 lg:px-20 border-t-4 border-gold relative overflow-hidden">

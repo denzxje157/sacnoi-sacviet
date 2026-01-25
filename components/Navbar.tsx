@@ -1,4 +1,4 @@
-
+const BASE_URL = import.meta.env.BASE_URL || "/";
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext.tsx';
