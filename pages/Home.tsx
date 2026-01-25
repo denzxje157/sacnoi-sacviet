@@ -566,7 +566,7 @@ export const storiesData: Story[] = [
   }
 ];
 
-const ethnicData: EthnicGroup[] = [
+export const ethnicData: EthnicGroup[] = [
   { name: "Kinh", location: "TP. Hà Nội", population: 82085826, coords: [21.0285, 105.8542], description: "Dân tộc đa số, giữ vai trò chủ đạo trong việc xây dựng và bảo vệ đất nước Việt Nam.", heritage: "Gốm Bát Tràng, Tranh Đông Hồ, Nón lá Huế.", img: "/pictures-54dantoc/kinh.jpg" },
   { name: "Tày", location: "Tỉnh Lạng Sơn", population: 1845492, coords: [21.85, 106.76], description: "Nổi tiếng với hát Then và đàn Tính huyền thoại, cư trú chủ yếu vùng núi phía Bắc.", heritage: "Hát Then, Đàn tính, Vải chàm.", img: "/pictures-54dantoc/tay.jpg" },
   { name: "Thái", location: "Tỉnh Sơn La", population: 1820902, coords: [21.32, 103.92], description: "Chủ nhân của các điệu xòe tinh tế và trang phục khăn Piêu độc nhất vô nhị.", heritage: "Múa Xòe, Khăn Piêu, Nhà sàn.", img: "/pictures-54dantoc/thai.jpg" },
