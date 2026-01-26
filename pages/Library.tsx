@@ -617,25 +617,25 @@ export const libraryData: LibraryItem[] = [
     id: 'fes-kinh-tet', category: 'festival', ethnic: 'Kinh',
     title: 'Tết Nguyên Đán', desc: 'Lễ hội lớn nhất và thiêng liêng nhất.',
     content: "Tết Nguyên Đán là dịp đoàn viên, sum họp gia đình. Bắt đầu từ lễ cúng ông Công ông Táo (23 tháng Chạp), gói bánh chưng, cúng Giao thừa, hái lộc đầu xuân. Trong 3 ngày Tết, mọi người đi chúc Tết họ hàng, thầy cô, bạn bè.",
-    image: 'https://media.vov.vn/sites/default/files/styles/large/public/2021-02/banh_chung_tet_0.jpg'
+    image: 'https://xdcs.cdnchinhphu.vn/446259493575335936/2025/12/14/tetnguyendanlaginguongocynghiacuatetnguyendan14345212022021-1765701820527875921672.jpg'
   },
   {
     id: 'fes-kinh-hung', category: 'festival', ethnic: 'Kinh',
     title: 'Giỗ Tổ Hùng Vương', desc: 'Tín ngưỡng thờ cúng tổ tiên độc đáo.',
     content: "'Dù ai đi ngược về xuôi, nhớ ngày Giỗ Tổ mùng mười tháng ba'. Lễ hội diễn ra tại đền Hùng (Phú Thọ) để tưởng nhớ 18 đời vua Hùng đã có công dựng nước. Nghi lễ dâng hương, rước kiệu thể hiện đạo lý uống nước nhớ nguồn.",
-    image: 'https://cdn.tuoitre.vn/thumb_w/730/2022/4/10/le-gio-to-hung-vuong-16495610850231652199852.jpg'
+    image: 'https://images.baodantoc.vn/uploads/2022/Th%C3%A1ng%203/Ng%C3%A0y%202/To%20Oanh/5giaiba-ledanghuonggiotovuahung-tacgianguyenanhtuan-1-16141397121551571823880.jpg'
   },
   {
     id: 'fes-kinh-giong', category: 'festival', ethnic: 'Kinh',
     title: 'Hội Gióng', desc: 'Hào khí chống giặc ngoại xâm.',
     content: "Lễ hội tại đền Sóc và đền Phù Đổng tôn vinh Thánh Gióng - một trong Tứ bất tử. Các màn diễn xướng chiến trận mô phỏng cuộc chiến chống giặc Ân được tổ chức quy mô, hoành tráng.",
-    image: 'https://hanoimoi.com.vn/Uploads/images/tuandiep/2023/01/27/hoi-giong.jpg'
+    image: 'https://cdn.nhandan.vn/images/85fc3722efdb205e3aa276f0c26aba65676cfa866e77b225a0313d387005580d6ffbbe71d6744d0b9230e3ec3a22c03972f4f7d8c2472078fcb9765cd9491c7eee69f22cd8ddfaa2fcc1478b674aa3ad/32-den-soc-36-9440-98-6074.jpeg'
   },
   {
     id: 'fes-kinh-lim', category: 'festival', ethnic: 'Kinh',
     title: 'Hội Lim', desc: 'Câu hát quan họ người ơi người ở.',
     content: "Lễ hội vùng Kinh Bắc với đặc sản là hát Quan họ đối đáp trên thuyền rồng và dưới cửa đình. Các liền anh liền chị trong trang phục mớ ba mớ bảy hát những làn điệu trữ tình.",
-    image: 'https://vcdn1-vnexpress.vnecdn.net/2019/02/16/hoi-lim-1-1550293322.jpg'
+    image: 'https://cafefcdn.com/203337114487263232/2024/2/20/hoi-lim-bac-ninh-01-1708313532253-17083135324491458662185-1708387397037-1708387397144378172565.jpeg'
   },
 
   // Khmer
@@ -643,13 +643,13 @@ export const libraryData: LibraryItem[] = [
     id: 'fes-khmer-chol', category: 'festival', ethnic: 'Khmer',
     title: 'Chol Chnam Thmay', desc: 'Tết năm mới, té nước cầu may.',
     content: "Diễn ra vào giữa tháng 4 dương lịch. Người dân đến chùa đắp núi cát (cầu phúc), tắm Phật bằng nước thơm và té nước vào nhau để gột rửa điều xui xẻo. Đây là lễ hội vui tươi nhất của người Khmer Nam Bộ.",
-    image: 'https://media.vov.vn/sites/default/files/styles/large/public/2022-04/chol_chnam_thmay_1.jpg'
+    image: 'https://cdn.thuvienphapluat.vn/uploads/Hoidapphapluat/2025/NTH/12042025/hinh-s1.jpg'
   },
   {
     id: 'fes-khmer-okombok', category: 'festival', ethnic: 'Khmer',
     title: 'Ok Om Bok', desc: 'Cúng Trăng và Đua Ghe Ngo kịch tính.',
     content: "Vào rằm tháng 10 âm lịch, người Khmer cúng tạ ơn thần Mặt Trăng đã ban cho mùa màng tốt tươi. Cốm dẹp là vật phẩm không thể thiếu. Lễ hội kết thúc bằng cuộc đua Ghe Ngo hào hứng và thả đèn gió.",
-    image: 'https://vcdn1-thethao.vnecdn.net/2023/11/27/dua-ghe-ngo-1-1701058776.jpg'
+    image: 'https://www.dulichxanh.com.vn/uploads/tiny_uploads/TOUR%20N%E1%BB%98I%20%C4%90%E1%BB%8AA/MIEN%20TAY%20NAM%20BO/TRA%20VINH/tour-du-lich-le-hoi-ba-chua-x%C6%B06.jpg'
   },
 
   // Thái
@@ -657,7 +657,7 @@ export const libraryData: LibraryItem[] = [
     id: 'fes-thai-hoaban', category: 'festival', ethnic: 'Thái',
     title: 'Lễ Hội Hoa Ban', desc: 'Mùa hoa tình yêu Tây Bắc.',
     content: "Tháng 2 âm lịch, khi hoa ban nở trắng rừng, người Thái tổ chức lễ hội để cầu mưa và tưởng nhớ chuyện tình nàng Ban chàng Khum. Trai gái hò hẹn, chơi ném còn, hát giao duyên trong không khí lãng mạn.",
-    image: 'https://danviet.mediacdn.vn/298739625832346624/2023/10/22/thai-1697940250965383569762.jpg'
+    image: 'hhttps://media-cdn-v2.laodong.vn/Storage/NewsPortal/2022/3/8/1021358/Nguon-Goc-Le-Hoi-Hoa-03.jpg'
   },
 
   // Chăm
@@ -665,7 +665,7 @@ export const libraryData: LibraryItem[] = [
     id: 'fes-cham-kate', category: 'festival', ethnic: 'Chăm',
     title: 'Lễ Hội Kate', desc: 'Lễ hội lớn nhất bên tháp cổ.',
     content: "Diễn ra vào tháng 7 lịch Chăm tại các khu đền tháp Po Nagar, Po Rome. Người dân rước y phục của vua chúa lên tháp, làm lễ tắm tượng, mặc y phục cho tượng thần. Đây là dịp con cháu tưởng nhớ tổ tiên.",
-    image: 'https://vcdn1-dulich.vnecdn.net/2022/10/24/le-hoi-kate-1-1666602353.jpg'
+    image: 'https://images.baodantoc.vn/uploads/2024/Thang-9/Ngay-17/Anh/untitled%20folder/z3666171023314-cb39daf1ae3370337730751d83cf3b84-_1__1.jpg'
   },
 
   // H'Mông, Tày, Dao...
@@ -673,43 +673,43 @@ export const libraryData: LibraryItem[] = [
     id: 'fes-hmong-gautao', category: 'festival', ethnic: "H'Mông",
     title: 'Lễ Hội Gầu Tào', desc: 'Cầu phúc, cầu mệnh đầu xuân.',
     content: "Gia đình nào hiếm muộn hoặc hay ốm đau sẽ nhờ thầy cúng dựng cây nêu giữa bãi đất rộng để tổ chức Gầu Tào. Đây cũng là dịp vui chơi xuân lớn nhất, trai gái múa khèn, hát gấu plềnh tìm bạn tình.",
-    image: 'https://baolaocai.vn/uploads/news/2023_01/26/le-hoi-gau-tao-1674725357.jpg'
+    image: 'https://hoidisanvanhoa.vn/wp-content/uploads/2025/07/unnamed.jpg'
   },
   {
     id: 'fes-tay-longtong', category: 'festival', ethnic: 'Tày',
     title: 'Lễ Lồng Tồng', desc: 'Hội xuống đồng lớn nhất Việt Bắc.',
     content: "Diễn ra vào tháng Giêng. Dân làng cúng Thần Nông cầu mùa. Tâm điểm là hội tung còn: quả còn ngũ sắc phải ném thủng tâm vòng tròn trên cây nêu cao vút thì năm đó bản làng mới may mắn.",
-    image: 'https://backan.gov.vn/uploads/2023/02/le-hoi-long-tong-ba-be-1.jpg'
+    image: 'https://images.baodantoc.vn/uploads/2024/Thang-2/Ngay-18/Thuy-Hong/428607093_377956158204513_6284438127550758328_n.jpg'
   },
   {
     id: 'fes-dao-tetnhay', category: 'festival', ethnic: 'Dao',
     title: 'Tết Nhảy', desc: 'Vũ điệu tri ân Bàn Vương.',
     content: "Một gia đình hoặc dòng họ tổ chức nhảy múa thâu đêm suốt sáng để tạ ơn Bàn Vương đã cứu mạng trong quá trình di cư. Các điệu múa mô tả cảnh luyện binh, săn bắn, cày cấy rất sinh động.",
-    image: 'https://baotuyenquang.com.vn/media/images/2024/02/img_20240216145831.jpg'
+    image: 'https://images.baodantoc.vn/uploads/2025/Thang-2/Ngay-16/Anh/4793981795731599558777134395488261356444207n.jpg'
   },
   {
     id: 'fes-pathen-nhaylua', category: 'festival', ethnic: 'Pà Thẻn',
     title: 'Lễ Hội Nhảy Lửa', desc: 'Vũ điệu thần bí trên than hồng.',
     content: "Các chàng trai Pà Thẻn sau khi được thầy cúng làm phép nhập đồng sẽ nhảy vào đống than hồng rực bằng chân trần, bốc than tung lên mà không hề bị bỏng. Nghi lễ thể hiện sức mạnh thần linh che chở con người.",
-    image: 'https://baohagiang.vn/uploads/news/2023_10/pa-then.jpg'
+    image: 'https://khodulieu.sohoa.tuyenquang.gov.vn/congthongtin/media/0b436c2ddf40355014251bef5dfd4da9.jpg'
   },
   {
     id: 'fes-mnong-duavoi', category: 'festival', ethnic: "M'Nông",
     title: 'Lễ Hội Đua Voi', desc: 'Tinh thần thượng võ Bản Đôn.',
     content: "Tổ chức tại Buôn Đôn, Đắk Lắk. Những chú voi to lớn dưới sự điều khiển của nài voi thi chạy, thi bơi vượt sông Sêrêpôk. Lễ hội tôn vinh tài nghệ thuần dưỡng voi của người M'Nông.",
-    image: 'https://vcdn1-dulich.vnecdn.net/2019/03/12/dua-voi-dak-lak-1552377543.jpg'
+    image: 'https://mtcs.1cdn.vn/2023/02/20/voi2.jpg'
   },
   {
     id: 'fes-lolo-caumua', category: 'festival', ethnic: 'Lô Lô',
     title: 'Lễ Cầu Mưa', desc: 'Hóa trang người rừng gọi mưa.',
     content: "Vào năm hạn hán, người Lô Lô Chải tổ chức lễ cầu mưa. Điểm độc đáo là những người đàn ông hóa trang toàn thân bằng lá ngô, lá cây, múa nhịp nhàng quanh đàn cúng để mời thần Mưa về.",
-    image: 'https://vcdn1-dulich.vnecdn.net/2019/06/10/lo-lo-cau-mua-1560155684.jpg'
+    image: 'https://bazantravel.com/cdn/medias/uploads/28/28137-le-hoi-cau-mua.jpg'
   },
   {
     id: 'fes-hanhi-khogiagia', category: 'festival', ethnic: 'Hà Nhì',
     title: 'Lễ Khô Già Già', desc: 'Lễ hội cầu mùa tháng 6.',
     content: "Lễ hội lớn nhất trong năm của người Hà Nhì Đen. Họ mổ trâu hiến tế, dựng cây đu, chơi bập bênh. Đây là dịp để cộng đồng gắn kết và cầu mong mùa màng bội thu.",
-    image: 'https://baolaichau.vn/uploads/news/2022_07/kho-gia-gia.jpg'
+    image: 'https://cdn.nhandan.vn/images/a706d232f85310e448a135d6f342672ffa5ded1a8d35eaf6ca3bfe6e082144609e625ee7c1b5361a0645a8ffbe8d971703d3e4f18434698e29ebf2fba9fb7d32cd459c52c1f2794c6e2b67add02d7bce/ndo_br_04-cau-mua-cau-an-sinh-hanh-phuc.jpg'
   }
 ];
 
