@@ -657,7 +657,7 @@ export const libraryData: LibraryItem[] = [
     id: 'fes-thai-hoaban', category: 'festival', ethnic: 'Thái',
     title: 'Lễ Hội Hoa Ban', desc: 'Mùa hoa tình yêu Tây Bắc.',
     content: "Tháng 2 âm lịch, khi hoa ban nở trắng rừng, người Thái tổ chức lễ hội để cầu mưa và tưởng nhớ chuyện tình nàng Ban chàng Khum. Trai gái hò hẹn, chơi ném còn, hát giao duyên trong không khí lãng mạn.",
-    image: 'hhttps://media-cdn-v2.laodong.vn/Storage/NewsPortal/2022/3/8/1021358/Nguon-Goc-Le-Hoi-Hoa-03.jpg'
+    image: 'https://thiennhienmoitruong.vn/upload2024/images/btv-n.linh/bvtnlinh-1/btv-1a/bvtnl/le-hoi-hoa-ban.jpg'
   },
 
   // Chăm
