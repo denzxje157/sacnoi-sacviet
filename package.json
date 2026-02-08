@@ -1,11 +1,12 @@
 {
-  "name": "kết-nối-bản-sắc---di-sản-văn-hóa-trực-tuyến",
+  "name": "ket-noi-ban-sac",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "vercel-build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
