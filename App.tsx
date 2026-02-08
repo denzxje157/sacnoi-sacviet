@@ -37,6 +37,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const App: React.FC = () => {
+  const [showChat, setShowChat] = useState(false);
   return (
     <CartProvider>
       <Router>
@@ -60,7 +61,21 @@ const App: React.FC = () => {
         
         {/* Chatbot */}
 
-        <AIChatWidget isOpen={true} onClose={() => {}} />
+        {/* Nút Khám phá AI */}
+          <button
+            onClick={() => setShowChat(true)}
+            className="fixed bottom-6 right-6 bg-primary text-white px-4 py-2 rounded-full shadow-lg z-[150] flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined">auto_awesome</span>
+            Khám phá AI
+          </button>
+
+          {/* Chatbot */}
+          <AIChatWidget
+            isOpen={showChat}
+            onClose={() => setShowChat(false)}
+          />
+
 
         <style>{`
           @keyframes fade-in-page {
