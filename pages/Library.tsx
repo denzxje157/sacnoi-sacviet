@@ -416,36 +416,40 @@ export const libraryData: LibraryItem[] = [
   // ==================== KIẾN TRÚC (ARCHITECTURE) ====================
   // Nhóm Kinh
   {
-    id: 'arch-kinh-dinh', category: 'architecture', ethnic: 'Kinh',
-    title: 'Đình Làng Việt', desc: 'Biểu tượng quyền lực làng xã và tâm linh.',
+    id: "arch-kinh-dinh", category: "architecture", ethnic: "Kinh",
+    title: "Đình Làng Việt", desc: "Biểu tượng quyền lực làng xã và tâm linh.",
     content: "Đình làng là công trình kiến trúc lớn nhất, quan trọng nhất của làng người Việt ở Bắc Bộ. Đây là nơi thờ Thành Hoàng (vị thần bảo hộ của làng) và cũng là nơi hội họp việc làng, tổ chức lễ hội.\n\nKiến trúc đình thường theo kiểu chữ Nhất, chữ Nhị hoặc chữ Công. Điểm đặc sắc nhất là bộ mái xòe rộng chiếm 2/3 chiều cao đình, các đầu đao cong vút mềm mại như cánh chim. Bên trong là hệ thống cột gỗ lim lớn và các mảng chạm khắc tứ linh (Long, Ly, Quy, Phượng), tứ quý rất tinh xảo.",
-    image: 'https://ltlskt-dhxd.com/wp-content/uploads/2019/03/4.png?w=840'
+    image: "pictures-thuvien/kien-truc/kinh/arch-kinh-dinh.png"
   },
   {
-    id: 'arch-kinh-chua', category: 'architecture', ethnic: 'Kinh',
-    title: 'Chùa Bắc Tông', desc: 'Không gian Phật giáo thanh tịnh.',
+    id: "arch-kinh-chua", category: "architecture",
+    ethnic: "Kinh",
+    title: "Chùa Bắc Tông",
+    desc: "Không gian Phật giáo thanh tịnh.",
     content: "Chùa Việt thường có kiến trúc chữ Tam, chữ Công với tam quan, tiền đường, thượng điện. Điểm nhấn là tháp chuông uy nghiêm và hệ thống tượng Phật sơn son thếp vàng lộng lẫy.",
-    image: 'https://cdn3.ivivu.com/2025/12/chua-dai-tong-lam-vung-tau-ivivu.jpg'
+    image: "pictures-thuvien/kien-truc/kinh/arch-kinh-chua.jpg"
   },
   {
-    id: 'arch-kinh-nharuong', category: 'architecture', ethnic: 'Kinh',
-    title: 'Nhà Rường Huế', desc: 'Tinh hoa kiến trúc gỗ truyền thống.',
+    id: "arch-kinh-nharuong", category: "architecture",
+    ethnic: "Kinh",
+    title: "Nhà Rường Huế",
+    desc: "Tinh hoa kiến trúc gỗ truyền thống.",
     content: "Nhà Rường là loại nhà ở 3 gian 2 chái đặc trưng của quan lại và tầng lớp thượng lưu xưa. Toàn bộ khung nhà bằng gỗ mít hoặc lim, được liên kết bằng mộng, không dùng đinh. Các cột, kèo được chạm trổ cực kỳ tinh vi.",
-    image: 'https://lalago.vn/wp-content/uploads/2025/08/nha-ruong-Hue-8.jpg'
+    image: "pictures-thuvien/kien-truc/kinh/arch-kinh-nharuong.jpg"
   },
 
   // Nhóm Chăm
   {
-    id: 'arch-cham-thap', category: 'architecture', ethnic: 'Chăm',
-    title: 'Tháp Chăm (Kalan)', desc: 'Đỉnh cao kỹ thuật xây gạch không mạch.',
+    id: "arch-cham-thap", category: "architecture", ethnic: "Chăm",
+    title: "Tháp Chăm (Kalan)", desc: "Đỉnh cao kỹ thuật xây gạch không mạch.",
     content: "Kalan là đền thờ các vị thần Hindu (Shiva), tượng trưng cho ngọn núi thần thoại Meru. Đặc điểm nổi bật là kỹ thuật xây gạch mài chập, khít mạch không cần vữa kết dính mà vẫn đứng vững ngàn năm. Trên mặt tường gạch là các phù điêu chạm khắc trực tiếp.",
-    image: 'https://fvgtravel.com.vn/uploads/up/root/editor/2025/05/20/19/33/w1230/tha1747722808_5733.jpg'
+    image: "pictures-thuvien/kien-truc/cham/arch-cham-thap.jpg"
   },
   {
-    id: 'arch-cham-nhatuc', category: 'architecture', ethnic: 'Chăm',
-    title: 'Nhà Tục', desc: 'Ngôi nhà gìn giữ phong tục mẫu hệ.',
+    id: "arch-cham-nhatuc", category: "architecture", ethnic: "Chăm",
+    title: "Nhà Tục", desc: "Ngôi nhà gìn giữ phong tục mẫu hệ.",
     content: "Trong khuôn viên gia đình người Chăm, Nhà Tục là nơi quan trọng nhất, nơi diễn ra các nghi lễ vòng đời và thờ cúng tổ tiên. Nhà thường thấp, kín đáo, thể hiện sự tôn nghiêm.",
-    image: 'https://kientrucvietas.com/data/tinymce/PHUONG%20PTQ/THANG%201.2017%20-%202/nha%20co%20nguoi%20cham%202.jpg'
+    image: "pictures-thuvien/kien-truc/cham/arch-cham-nhatuc.jpg"
   },
 
   // Nhóm Khmer
@@ -453,7 +457,7 @@ export const libraryData: LibraryItem[] = [
     id: 'arch-khmer-chua', category: 'architecture', ethnic: 'Khmer',
     title: 'Chùa Khmer (Vihear)', desc: 'Rực rỡ sắc vàng Phật giáo Nam Tông.',
     content: "Chùa là trung tâm sinh hoạt của phum sóc. Chánh điện (Vihear) là kiến trúc chính, mái nhọn nhiều tầng, trang trí tượng rắn Naga, chim thần Keynor, chằn Yeak. Màu vàng rực rỡ tượng trưng cho sự giác ngộ.",
-    image: 'https://media.vov.vn/sites/default/files/styles/large/public/2023-10/w-chua-ang-1-2-254.jpg'
+    image: "pictures-thuvien/kien-truc/khmer/arch-khmer-chua.jpg"
   },
 
   // Nhóm Tây Nguyên (Gia Rai, Ê Đê, Ba Na...)
@@ -461,19 +465,19 @@ export const libraryData: LibraryItem[] = [
     id: 'arch-ede-nhadai', category: 'architecture', ethnic: 'Ê Đê',
     title: 'Nhà Dài', desc: 'Dài như tiếng chiêng ngân.',
     content: "Nhà Dài là nơi sinh sống của đại gia đình mẫu hệ. Nhà làm bằng tre nứa gỗ, sàn cao, có cầu thang đực (cho khách) và cầu thang cái (có hình bầu vú, cho người nhà). Độ dài của nhà thể hiện sự thịnh vượng của dòng họ.",
-    image: 'https://heritagevietnamairlines.cdn.vccloud.vn/wp-content/uploads/2020/09/Nha-dai-EDe-11_compressed.jpg'
+    image: "pictures-thuvien/kien-truc/e-de/arch-ede-nhadai.jpg"
   },
   {
     id: 'arch-bana-nharong', category: 'architecture', ethnic: 'Ba Na',
     title: 'Nhà Rông', desc: 'Lưỡi rìu vút cao giữa đại ngàn.',
     content: "Nhà Rông là ngôi nhà chung, nơi hội họp, xử kiện và tiếp khách của buôn làng Ba Na, Xơ Đăng. Mái nhà cao vút như lưỡi rìu ngược (có thể cao tới 20m), thể hiện sức mạnh và uy quyền của làng trước thiên nhiên.",
-    image: 'https://cly.1cdn.vn/2021/07/07/dantoctongiao.congly.vn-upload-content_img-2021-0707-_nha-rong-la-bieu-tuong-van-hoa-cua-tay-nguyen_anh_bai_nha_rong_tay_nguyen_2.jpg'
+    image: "pictures-thuvien/kien-truc/ba-na/arch-bana-nharong.jpg"
   },
   {
     id: 'arch-giarai-nhamo', category: 'architecture', ethnic: 'Gia Rai',
     title: 'Nhà Mồ', desc: 'Kiến trúc tâm linh và nghệ thuật tạc tượng.',
     content: "Nhà mồ được xây dựng công phu cho người chết trước lễ Bỏ mả. Xung quanh nhà mồ là hàng rào tượng gỗ (tượng người khóc, tượng phồn thực...) thể hiện quan niệm sinh sôi nảy nở.",
-    image: 'https://static-6.happynest.vn/storage/uploads/2025/08/nha-mo-tay-nguyen-kien-truc-tam-linh-doc-dao-gan-voi-nghi-le_3.jpg'
+    image: "pictures-thuvien/kien-truc/gia-rai/arch-giarai-nhamo.jpg"
   },
 
   // Nhóm Tây Bắc (Thái, H'Mông...)

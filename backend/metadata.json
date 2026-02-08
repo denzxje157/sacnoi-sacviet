@@ -1,8 +1,0 @@
-{
-  "name": "Kết Nối Bản Sắc - Di Sản Văn Hóa Trực Tuyến",
-  "description": "Một nền tảng toàn diện để khám phá, bảo tồn và tôn vinh những giá trị di sản văn hóa truyền thống của Việt Nam với tông màu Đỏ - Vàng chủ đạo.",
-  "requestFramePermissions": [
-    "camera",
-    "geolocation"
-  ]
-}
