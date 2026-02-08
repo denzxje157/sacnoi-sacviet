@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar.tsx';
@@ -8,6 +7,7 @@ import Marketplace from './pages/Marketplace.tsx';
 import Library from './pages/Library.tsx';
 import Community from './pages/Community.tsx';
 import Footer from './components/Footer.tsx';
+import AIChatWidget from "./components/AIChatWidget.tsx";
 import { CartProvider } from './context/CartContext.tsx';
 import CartDrawer from './components/CartDrawer.tsx';
 
@@ -57,6 +57,9 @@ const App: React.FC = () => {
           </main>
           <Footer />
         </div>
+        
+        {/* Chatbot */}
+        <AIChatWidget />
         <style>{`
           @keyframes fade-in-page {
             from { opacity: 0; transform: translateY(10px); }
