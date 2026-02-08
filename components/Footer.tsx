@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           <div className="col-span-1 lg:col-span-2 space-y-8">
             <div className="flex items-center gap-4">
               <img 
-                src={`${import.meta.env.BASE_URL}/pictures-54dantoc/logo.png`}
+                src={"pictures-54dantoc/logo.png"}
                 alt="Logo Sắc Nối" 
                 className="h-14 w-14 rounded-full object-cover border-2 border-gold shadow-lg"
               />
