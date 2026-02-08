@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar.tsx';
 import Home from './pages/Home.tsx';
