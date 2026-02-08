@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.BASE_URL || "/";
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext.tsx';
@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <img 
-              src={`${import.meta.env.BASE_URL}/pictures-54dantoc/logo.png`} 
+              src={"pictures-54dantoc/logo.png"} 
               alt="Logo Sắc Nối" 
               className="h-12 w-12 rounded-full object-cover border-2 border-gold shadow-md transition-transform group-hover:scale-110"
             />
