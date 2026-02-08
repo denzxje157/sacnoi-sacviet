@@ -87,32 +87,28 @@ const AIChatWidget: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOp
     setIsLoading(true);
 
     try {
-      // CHẾ ĐỘ ONLINE (GEMINI API)
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: [
-            { role: 'user', parts: [{ text: userMsg.text }] }
-        ],
-        config: {
-          systemInstruction: `Bạn là 'Già làng Di Sản' - một chuyên gia văn hóa Việt Nam uyên bác của website Sắc Nối.
-          
-          ${systemContext}
+      // CHẾ ĐỘ ONLINE (qua backend Vercel)
+         const response = await fetch("/api/chat", {
+          method: "POST",
+            headers: {
+                 "Content-Type": "application/json",
+               },
+               body: JSON.stringify({
+                  message: userMsg.text,
+                  context: systemContext
+               }),
+               });
 
-          NHIỆM VỤ CỦA BẠN:
-          1. Ưu tiên hàng đầu: Dùng dữ liệu ở trên để trả lời. Ví dụ: Nếu hỏi "có bán gùi không", hãy tìm trong mục 1 (Chợ Phiên) và liệt kê tên, giá tiền chính xác. Nếu hỏi về "Vịnh Hạ Long", tìm trong mục 2.
-          2. Nếu không tìm thấy thông tin trong dữ liệu trên: Hãy dùng kiến thức rộng lớn của bạn về văn hóa Việt Nam để trả lời.
-          3. Phong cách: Giọng văn già làng, ấm áp, xưng "Ta" - gọi "con".
-          4. Nếu khách hỏi mua hàng: Hãy hướng dẫn họ vào trang "Chợ Phiên".
-          5. Trả lời ngắn gọn, súc tích (dưới 150 từ).`,
-        },
-      });
+               const data = await response.json();
 
-      const text = response.text;
-      if (text) {
-        const aiMsg: Message = { id: (Date.now() + 1).toString(), role: 'model', text: text };
-        setMessages(prev => [...prev, aiMsg]);
-      }
+               const aiMsg: Message = {
+               id: (Date.now() + 1).toString(),
+               role: "model",
+               text: data.reply || "Già làng chưa nghĩ ra câu trả lời.",
+               };
+
+setMessages(prev => [...prev, aiMsg]);
+
     } catch (error) {
       console.error("Lỗi API:", error);
       // Fallback nếu API lỗi

@@ -363,7 +363,7 @@ export const libraryData = [
     title: "Lễ Hội Nhảy Lửa",
     desc: "Vũ điệu thần bí trên than hồng.",
     content: "Các chàng trai Pà Thẻn sau khi được thầy cúng làm phép nhập đồng sẽ nhảy vào đống than hồng rực bằng chân trần, bốc than tung lên mà không hề bị bỏng. Nghi lễ thể hiện sức mạnh thần linh che chở con người.",
-    image: "https://khodulieu.sohoa.tuyenquang.gov.vn/congthongtin/media/0b436c2ddf40355014251bef5dfd4da9.jpg"
+    image: "pictures-thuvien/le-hoi/pa-then/nhay-lua.jpg"
   },
   {
     id: "fes-mnong-duavoi",

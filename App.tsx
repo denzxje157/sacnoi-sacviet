@@ -59,7 +59,9 @@ const App: React.FC = () => {
         </div>
         
         {/* Chatbot */}
-        <AIChatWidget />
+
+        <AIChatWidget isOpen={true} onClose={() => {}} />
+
         <style>{`
           @keyframes fade-in-page {
             from { opacity: 0; transform: translateY(10px); }

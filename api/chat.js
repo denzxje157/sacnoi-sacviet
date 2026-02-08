@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const userMessage = req.body.message;
+    const { message, context } = req.body;
 
     const response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" +
@@ -15,14 +15,31 @@ export default async function handler(req, res) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: userMessage }] }],
+          contents: [
+            {
+              parts: [
+                {
+                  text: `
+${context}
+
+Câu hỏi của người dùng:
+${message}
+`,
+                },
+              ],
+            },
+          ],
         }),
       }
     );
 
     const data = await response.json();
 
-    res.status(200).json(data);
+    const reply =
+      data.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Già làng đang suy nghĩ, con thử hỏi lại nhé.";
+
+    res.status(200).json({ reply });
   } catch (err) {
     res.status(500).json({ error: "Gemini API error" });
   }
