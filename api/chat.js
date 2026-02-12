@@ -25,23 +25,28 @@ export default async function handler(req, res) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: `
-${context || ""}
+  contents: [
+    {
+      parts: [
+        {
+          text: `
+${context}
+
+Bạn là Già làng Di Sản.
+
+NHIỆM VỤ:
+- Ưu tiên dùng dữ liệu trên để trả lời.
+- Nếu câu hỏi không có trong dữ liệu, hãy dùng kiến thức chung để trả lời ngắn gọn, thân thiện.
 
 Câu hỏi của người dùng:
 ${message}
 `,
-                },
-              ],
-            },
-          ],
-        }),
-      }
-    );
+        },
+      ],
+    },
+  ],
+}),
+
 
     const data = await response.json();
 
