@@ -9,11 +9,35 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message, context } = req.body;
+    const { message, context, history = [] } = req.body;
 
     if (!message) {
       return res.status(400).json({ error: "Missing message" });
     }
+
+    // Chuyển lịch sử chat sang format Gemini
+    const formattedHistory = history.map((msg) => ({
+      role: msg.role === "assistant" ? "model" : "user",
+      parts: [{ text: msg.content }],
+    }));
+
+    const systemPrompt = `
+Bạn là Già làng Di Sản – trợ lý văn hóa của website Sắc Nối.
+
+NHIỆM VỤ:
+- Trả lời thân thiện, dễ hiểu, mang màu sắc kể chuyện.
+- Xưng "ta", gọi người dùng là "con".
+- Hiểu ngữ cảnh hội thoại trước đó.
+
+NGUYÊN TẮC TRẢ LỜI:
+1. Ưu tiên dữ liệu từ website bên dưới.
+2. Nếu không có trong dữ liệu → dùng kiến thức chung chính xác.
+3. Không bịa thông tin.
+4. Trả lời ngắn gọn, rõ ràng.
+
+DỮ LIỆU WEBSITE:
+${context || "Không có dữ liệu nội bộ."}
+`;
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
@@ -26,25 +50,12 @@ export default async function handler(req, res) {
           contents: [
             {
               role: "user",
-              parts: [
-                {
-                  text: `
-Bạn là **Già làng Di Sản**, trợ lý văn hóa của website Sắc Nối.
-
-DỮ LIỆU WEBSITE:
-${context || "Không có dữ liệu nội bộ."}
-
-NGUYÊN TẮC TRẢ LỜI:
-1. Nếu câu hỏi liên quan đến sản phẩm, dân tộc, di sản trong dữ liệu → ưu tiên dùng dữ liệu trên.
-2. Nếu câu hỏi KHÔNG có trong dữ liệu → trả lời bằng kiến thức chung.
-3. Giọng văn thân thiện, xưng "ta" – gọi "con".
-4. Trả lời ngắn gọn, dễ hiểu.
-
-Câu hỏi của người dùng:
-${message}
-                  `,
-                },
-              ],
+              parts: [{ text: systemPrompt }],
+            },
+            ...formattedHistory,
+            {
+              role: "user",
+              parts: [{ text: message }],
             },
           ],
         }),

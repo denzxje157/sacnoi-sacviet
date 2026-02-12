@@ -9,20 +9,17 @@ interface Message {
   id: string;
   role: 'user' | 'model';
   text: string;
-  actionLink?: string; // Link điều hướng nếu có
-  actionLabel?: string; // Nhãn nút bấm
+  actionLink?: string;
+  actionLabel?: string;
 }
 
-// Component để hiển thị text với định dạng đặc biệt (Bỏ ** và thay bằng chữ đậm đỏ)
 const FormattedMessageText: React.FC<{ text: string }> = ({ text }) => {
-  // Tách chuỗi dựa trên dấu **
   const parts = text.split(/(\*\*.*?\*\*)/g);
-  
+
   return (
     <span>
       {parts.map((part, index) => {
         if (part.startsWith('**') && part.endsWith('**')) {
-          // Loại bỏ dấu ** và render với style đậm + đỏ (Màu Primary của web)
           return (
             <span key={index} className="font-black text-primary">
               {part.slice(2, -2)}
@@ -38,10 +35,10 @@ const FormattedMessageText: React.FC<{ text: string }> = ({ text }) => {
 const AIChatWidget: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([
-    { 
-      id: 'welcome', 
-      role: 'model', 
-      text: 'Chào người bạn phương xa! Ta là Già làng Di Sản. Con muốn tìm hiểu về sản phẩm dân tộc nào, hay muốn nghe chuyện gì, ta sẽ kể và dẫn con đến nơi con cần.' 
+    {
+      id: 'welcome',
+      role: 'model',
+      text: 'Chào người bạn phương xa! Ta là Già làng Di Sản. Con muốn tìm hiểu về sản phẩm dân tộc nào, hay muốn nghe chuyện gì, ta sẽ kể và dẫn con đến nơi con cần.'
     }
   ]);
   const [inputText, setInputText] = useState('');
@@ -54,80 +51,90 @@ const AIChatWidget: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOp
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isOpen]);
+  }, [messages, isOpen, isLoading]);
 
-  // Tạo Context String từ dữ liệu website
+  // Tạo context từ dữ liệu web
   const systemContext = useMemo(() => {
     let context = "DƯỚI ĐÂY LÀ DỮ LIỆU CÓ TRÊN WEBSITE SẮC NỐI:\n\n";
 
-    // 1. Thêm dữ liệu sản phẩm Chợ Phiên
-    context += "=== 1. DANH SÁCH SẢN PHẨM BÁN TẠI CHỢ PHIÊN (MARKETPLACE) ===\n";
+    context += "=== SẢN PHẨM CHỢ PHIÊN ===\n";
     marketplaceData.forEach(group => {
-       group.items.forEach(item => {
-          context += `- Dân tộc: ${group.e} | Sản phẩm: ${item.n} | Giá: ${item.p} | Mô tả: ${item.d || 'Không có mô tả'}\n`;
-       });
+      group.items.forEach(item => {
+        context += `- Dân tộc: ${group.e} | Sản phẩm: ${item.n} | Giá: ${item.p}\n`;
+      });
     });
 
-    // 2. Thêm dữ liệu Di sản trên bản đồ
-    context += "\n=== 2. DANH SÁCH DI SẢN TRÊN BẢN ĐỒ ===\n";
+    context += "\n=== DI SẢN ===\n";
     heritageData.forEach(site => {
-       context += `- Di sản: ${site.name} | Loại: ${site.type} | Địa điểm: ${site.location} | Mô tả: ${site.description}\n`;
+      context += `- ${site.name} | ${site.location}\n`;
     });
 
-    // 3. Thêm dữ liệu Dân tộc
-    context += "\n=== 3. THÔNG TIN 54 DÂN TỘC ===\n";
+    context += "\n=== DÂN TỘC ===\n";
     ethnicData.forEach(ethnic => {
-       context += `- Dân tộc: ${ethnic.name} | Nơi sống: ${ethnic.location} | Di sản: ${ethnic.heritage} | Mô tả: ${ethnic.description}\n`;
+      context += `- ${ethnic.name} | ${ethnic.location}\n`;
     });
 
-    // 4. Thêm dữ liệu Thư viện (Kiến trúc, Lễ hội...)
-    context += "\n=== 4. THƯ VIỆN DI SẢN (KIẾN TRÚC/LỄ HỘI) ===\n";
+    context += "\n=== THƯ VIỆN ===\n";
     libraryData.forEach(lib => {
-       context += `- ${lib.title} (${lib.category}): ${lib.desc}. Nội dung: ${lib.content.substring(0, 150)}...\n`;
+      context += `- ${lib.title}: ${lib.desc}\n`;
     });
 
     return context;
   }, []);
 
   const handleSendMessage = async () => {
-  if (!inputText.trim()) return;
+  if (!inputText.trim() || isLoading) return;
 
-  const userMsg: Message = { id: Date.now().toString(), role: 'user', text: inputText };
-  setMessages(prev => [...prev, userMsg]);
-  setInputText('');
-  setIsLoading(true);
+  const userMsg: Message = {
+    id: Date.now().toString(),
+    role: "user",
+    text: inputText
+  };
 
   const aiMsgId = (Date.now() + 1).toString();
-  setMessages(prev => [...prev, { id: aiMsgId, role: 'model', text: '' }]);
+
+  // Tạo full history mới (QUAN TRỌNG)
+  const updatedMessages = [...messages, userMsg];
+
+  // Update UI ngay lập tức
+  setMessages([...updatedMessages, { id: aiMsgId, role: "model", text: "" }]);
+  setInputText("");
+  setIsLoading(true);
 
   try {
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         message: inputText,
         context: systemContext,
-      }),
+        history: updatedMessages.map(m => ({
+          role: m.role === "model" ? "assistant" : "user",
+          content: m.text
+        }))
+      })
     });
 
     const data = await response.json();
 
     let fullText = data.reply || "Già làng chưa nghĩ ra câu trả lời.";
 
-    // Xử lý link điều hướng nếu có
     let actionLink: string | undefined;
     let actionLabel: string | undefined;
 
     const navigateMatch = fullText.match(/<<<NAVIGATE:(.*?)>>>/);
+
     if (navigateMatch) {
       fullText = fullText.replace(navigateMatch[0], "").trim();
       actionLink = navigateMatch[1];
 
       if (actionLink.includes("marketplace")) {
         const ethnicParam = actionLink.split("ethnic=")[1];
-        const ethnicName = ethnicParam ? decodeURIComponent(ethnicParam) : "Chợ Phiên";
+        const ethnicName = ethnicParam
+          ? decodeURIComponent(ethnicParam)
+          : "Chợ Phiên";
         actionLabel = `Đến gian hàng ${ethnicName}`;
       } else {
         actionLabel = "Xem chi tiết";
@@ -144,22 +151,19 @@ const AIChatWidget: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOp
 
   } catch (error) {
     console.error("Lỗi API:", error);
-    const errorMsg: Message = {
-      id: (Date.now() + 1).toString(),
-      role: "model",
-      text: "Mạng của già làng đang chập chờn quá. Con thử lại sau nhé.",
-    };
 
-    setMessages(prev => prev.filter(msg => msg.id !== aiMsgId).concat(errorMsg));
+    setMessages(prev =>
+      prev.map(msg =>
+        msg.id === aiMsgId
+          ? { ...msg, text: "Mạng của già làng đang chập chờn quá. Con thử lại sau nhé." }
+          : msg
+      )
+    );
   } finally {
     setIsLoading(false);
   }
 };
 
-
-
-      // QUAN TRỌNG: Lặp qua result để lấy từng chunk (result itself is the async iterable)
-      
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -172,7 +176,7 @@ const AIChatWidget: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOp
       window.open(link, '_blank');
     } else {
       navigate(link);
-      onClose(); // Đóng chat khi chuyển trang để người dùng xem
+      onClose();
     }
   };
 
@@ -201,29 +205,34 @@ const AIChatWidget: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOp
 
       {/* Chat Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-5 custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]">
-         {messages.map((msg) => (
-            <div key={msg.id} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-               <div className={`max-w-[85%] p-3.5 rounded-2xl text-sm font-medium leading-relaxed shadow-sm whitespace-pre-wrap ${
-                  msg.role === 'user' 
-                  ? 'bg-primary text-white rounded-br-none' 
-                  : 'bg-white text-text-main border border-gold/20 rounded-bl-none'
-               }`}>
-                  {/* Sử dụng component định dạng text */}
-                  {msg.role === 'user' ? msg.text : <FormattedMessageText text={msg.text} />}
-               </div>
-               
-               {/* Nút điều hướng nếu có */}
-               {msg.actionLink && msg.actionLabel && (
-                 <button 
-                   onClick={() => handleNavigate(msg.actionLink!)}
-                   className="mt-2 ml-2 bg-gold text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest shadow-lg hover:bg-bronze transition-all flex items-center gap-2 animate-fade-in"
-                 >
-                   {msg.actionLabel}
-                   <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                 </button>
-               )}
-            </div>
-         ))}
+         {messages.map((msg) => {
+            // FIX: Không hiển thị bong bóng chat nếu nội dung rỗng (tránh hộp trắng thừa)
+            if (!msg.text && msg.role === 'model') return null;
+
+            return (
+              <div key={msg.id} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                 <div className={`max-w-[85%] p-3.5 rounded-2xl text-sm font-medium leading-relaxed shadow-sm whitespace-pre-wrap ${
+                    msg.role === 'user' 
+                    ? 'bg-primary text-white rounded-br-none' 
+                    : 'bg-white text-text-main border border-gold/20 rounded-bl-none'
+                 }`}>
+                    {/* Sử dụng component định dạng text */}
+                    {msg.role === 'user' ? msg.text : <FormattedMessageText text={msg.text} />}
+                 </div>
+                 
+                 {/* Nút điều hướng nếu có */}
+                 {msg.actionLink && msg.actionLabel && (
+                   <button 
+                     onClick={() => handleNavigate(msg.actionLink!)}
+                     className="mt-2 ml-2 bg-gold text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest shadow-lg hover:bg-bronze transition-all flex items-center gap-2 animate-fade-in"
+                   >
+                     {msg.actionLabel}
+                     <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                   </button>
+                 )}
+              </div>
+            );
+         })}
          {isLoading && (
             <div className="flex justify-start">
                <div className="bg-white border border-gold/20 p-3 rounded-2xl rounded-bl-none flex gap-1 items-center shadow-sm">
@@ -247,13 +256,16 @@ const AIChatWidget: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOp
                onChange={(e) => setInputText(e.target.value)}
                onKeyDown={handleKeyPress}
                placeholder="Hỏi về sản phẩm, văn hóa..."
+               // FIX: data-gramm="false" để chặn Grammarly và các extension chèn vào
+               data-gramm="false" 
+               data-enable-grammarly="false"
                className="w-full bg-background-light border-2 border-gold/20 rounded-2xl py-3 pl-4 pr-12 text-sm text-text-main placeholder:text-text-soft/50 focus:outline-none focus:border-primary focus:ring-0 resize-none max-h-24 font-medium transition-all"
                rows={1}
             />
             <button 
                onClick={handleSendMessage}
                disabled={!inputText.trim() || isLoading}
-               className="absolute right-2 top-1/2 -translate-y-1/2 size-9 rounded-xl bg-primary text-white hover:bg-gold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center shadow-md"
+               className="absolute right-2 top-1/2 -translate-y-1/2 size-9 rounded-xl bg-primary text-white hover:bg-gold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center shadow-md z-10"
             >
                <span className="material-symbols-outlined text-lg">send</span>
             </button>
@@ -267,3 +279,4 @@ const AIChatWidget: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOp
 };
 
 export default AIChatWidget;
+
