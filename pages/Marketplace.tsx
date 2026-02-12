@@ -441,14 +441,14 @@ const ProductModal = ({ product, onClose }: { product: Product, onClose: () => v
       {/* Modal Container: KHÔNG full màn hình, có margin, bo góc lớn */}
       <div className="bg-white w-full max-w-5xl h-[85vh] md:h-auto md:max-h-[90vh] rounded-[2rem] shadow-2xl relative z-10 animate-slide-up flex flex-col md:flex-row overflow-hidden border-4 border-gold/30">
         
-        {/* Nút Đóng TO RÕ RÀNG */}
-        <button 
-          onClick={onClose} 
-          className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full font-black uppercase text-xs tracking-widest shadow-lg flex items-center gap-2 transition-transform hover:scale-105 active:scale-95 border-2 border-white"
-        >
-          <span>ĐÓNG CỬA SỔ</span>
-          <span className="material-symbols-outlined text-lg">close</span>
-        </button>
+        {/* Nút Đóng chỉ có Icon X */}
+          <button 
+            onClick={onClose} 
+            className="absolute top-2 right-2 z-50 p-2 text-gray-400 hover:text-red-600 hover:bg-gray-100 rounded-full transition-colors"
+            title="Đóng"
+          >
+            <span className="material-symbols-outlined text-2xl">close</span>
+          </button>
 
         {/* Cột Ảnh */}
         <div className="w-full md:w-[60%] h-1/2 md:h-auto relative bg-[#F2EFE6] border-b md:border-b-0 md:border-r border-gold/10">

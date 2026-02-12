@@ -188,13 +188,14 @@ const Library: React.FC = () => {
           <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 font-display">
             <div className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in" onClick={() => setSelectedItem(null)}></div>
             <div className="bg-white w-full max-w-5xl h-[85vh] md:h-auto md:max-h-[90vh] rounded-[2rem] shadow-2xl relative z-10 animate-slide-up flex flex-col md:flex-row overflow-hidden border-4 border-gold/20">
-               <button 
-                  onClick={() => setSelectedItem(null)}
-                  className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-full font-black uppercase text-xs tracking-widest shadow-lg flex items-center gap-2 border-2 border-white transition-transform active:scale-95"
-               >
-                 <span>ĐÓNG CỬA SỔ</span>
-                 <span className="material-symbols-outlined text-lg">close</span>
-               </button>
+               {/* Nút Đóng chỉ có Icon X */}
+                <button 
+                  onClick={() => setSelectedItem(null)} 
+                  className="absolute top-2 right-2 z-50 p-2 text-gray-400 hover:text-red-600 hover:bg-gray-100 rounded-full transition-colors"
+                  title="Đóng"
+                >
+                  <span className="material-symbols-outlined text-2xl">close</span>
+                </button>
 
                <div className="w-full md:w-[70%] h-1/2 md:h-auto relative shrink-0 group bg-[#F2EFE6] border-b md:border-b-0 md:border-r border-gold/10">
                  <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-full object-cover" />
