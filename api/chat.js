@@ -1,10 +1,8 @@
 export default async function handler(req, res) {
-  // Chỉ cho phép POST
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  // Kiểm tra API key
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: "Missing GEMINI_API_KEY" });
@@ -25,32 +23,36 @@ export default async function handler(req, res) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-  contents: [
-    {
-      parts: [
-        {
-          text: `
-${context}
+          contents: [
+            {
+              role: "user",
+              parts: [
+                {
+                  text: `
+Bạn là **Già làng Di Sản**, trợ lý văn hóa của website Sắc Nối.
 
-Bạn là Già làng Di Sản.
+DỮ LIỆU WEBSITE:
+${context || "Không có dữ liệu nội bộ."}
 
-NHIỆM VỤ:
-- Ưu tiên dùng dữ liệu trên để trả lời.
-- Nếu câu hỏi không có trong dữ liệu, hãy dùng kiến thức chung để trả lời ngắn gọn, thân thiện.
+NGUYÊN TẮC TRẢ LỜI:
+1. Nếu câu hỏi liên quan đến sản phẩm, dân tộc, di sản trong dữ liệu → ưu tiên dùng dữ liệu trên.
+2. Nếu câu hỏi KHÔNG có trong dữ liệu → trả lời bằng kiến thức chung.
+3. Giọng văn thân thiện, xưng "ta" – gọi "con".
+4. Trả lời ngắn gọn, dễ hiểu.
 
 Câu hỏi của người dùng:
 ${message}
-`,
-        },
-      ],
-    },
-  ],
-}),
-
+                  `,
+                },
+              ],
+            },
+          ],
+        }),
+      }
+    );
 
     const data = await response.json();
 
-    // Nếu Gemini trả lỗi
     if (!response.ok) {
       console.error("Gemini error:", data);
       return res.status(500).json({ error: "Gemini API failed" });
