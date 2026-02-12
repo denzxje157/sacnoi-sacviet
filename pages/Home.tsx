@@ -128,49 +128,55 @@ const StoryModal = ({ story, onClose }: { story: Story, onClose: () => void }) =
   }, []);
 
   return createPortal(
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 font-display">
-      <div className="absolute inset-0 bg-text-main/80 backdrop-blur-sm animate-fade-in" onClick={onClose}></div>
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 font-display">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in" onClick={onClose}></div>
       
-      {/* Modal UI updated to match Marketplace ProductModal style */}
-      <div className="bg-white w-[95vw] h-[85vh] rounded-[2.5rem] shadow-2xl relative z-10 animate-slide-up flex overflow-hidden border-4 border-gold/20 flex-col md:flex-row">
+      {/* Modal Container: Thẻ nổi, kích thước giới hạn, bo góc lớn */}
+      <div className="bg-white w-full max-w-5xl h-[85vh] md:h-auto md:max-h-[90vh] rounded-[2.5rem] shadow-2xl relative z-10 animate-slide-up flex overflow-hidden border-4 border-gold/30 flex-col md:flex-row">
         
-        <button onClick={onClose} className="absolute top-6 right-6 z-50 size-12 rounded-full bg-white/20 hover:bg-primary hover:text-white transition-colors flex items-center justify-center backdrop-blur-md border border-white/40 shadow-lg group">
-          <span className="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform">close</span>
+        {/* Nút Đóng TO RÕ RÀNG */}
+        <button 
+          onClick={onClose} 
+          className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full font-black uppercase text-xs tracking-widest shadow-lg flex items-center gap-2 transition-transform hover:scale-105 active:scale-95 border-2 border-white"
+        >
+          <span>ĐÓNG CỬA SỔ</span>
+          <span className="material-symbols-outlined text-lg">close</span>
         </button>
 
-        {/* Cột Ảnh: Chiếm 70% chiều rộng trên desktop, 50% chiều cao trên mobile */}
-        <div className="w-full md:w-[70%] h-1/2 md:h-full relative bg-[#F2EFE6] group border-b md:border-b-0 md:border-r border-gold/10">
+        {/* Cột Ảnh */}
+        <div className="w-full md:w-[60%] h-1/2 md:h-auto relative bg-[#F2EFE6] group border-b md:border-b-0 md:border-r border-gold/10 shrink-0">
           <img src={story.image} alt={story.title} className="w-full h-full object-cover grayscale-[10%]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90"></div>
           
-          <div className="absolute bottom-6 left-6 md:bottom-10 md:left-16 text-white max-w-2xl p-2">
+          <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 text-white max-w-2xl p-2 pr-10">
              <div className="inline-block px-4 py-1.5 bg-primary/90 backdrop-blur text-white text-[10px] font-black uppercase tracking-widest rounded-full mb-3 md:mb-4 border border-white/20 shadow-lg">
                {story.subtitle}
              </div>
-             <h2 className="text-3xl md:text-4xl lg:text-6xl font-black italic tracking-tighter leading-tight drop-shadow-lg">
+             <h2 className="text-2xl md:text-4xl lg:text-5xl font-black italic tracking-tighter leading-tight drop-shadow-lg">
                {story.title}
              </h2>
           </div>
         </div>
 
-        {/* Cột Nội dung: Chiếm 30% trên desktop, 50% chiều cao trên mobile */}
-        <div className="w-full md:w-[30%] h-1/2 md:h-full flex flex-col bg-white relative">
-          <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-8 lg:p-10">
-             <div className="flex items-center gap-3 mb-6 md:mb-8">
+        {/* Cột Nội dung */}
+        <div className="w-full md:w-[40%] h-1/2 md:h-auto flex flex-col bg-white relative">
+          <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-8">
+             <div className="flex items-center gap-3 mb-6 md:mb-8 sticky top-0 bg-white pt-2 pb-4 border-b border-gold/10 z-10">
                 <span className="w-8 h-1 bg-primary rounded-full"></span>
                 <span className="text-xs font-black uppercase tracking-[0.2em] text-text-soft">Câu chuyện di sản</span>
              </div>
              
-             <div className="prose prose-sm md:prose-lg text-text-main font-serif leading-loose text-justify">
+             <div className="prose prose-sm text-text-main font-serif leading-loose text-justify">
                {story.content.map((paragraph, idx) => (
-                  <p key={idx} className="mb-4 md:mb-6 opacity-0 animate-fade-in-up" style={{ animationDelay: `${idx * 150}ms`, animationFillMode: 'forwards' }}>
+                  <p key={idx} className="mb-4 opacity-0 animate-fade-in-up" style={{ animationDelay: `${idx * 150}ms`, animationFillMode: 'forwards' }}>
                     {paragraph}
                   </p>
                ))}
              </div>
              
-             <div className="mt-8 md:mt-10 p-6 bg-background-light rounded-2xl border border-gold/10">
-                <p className="text-center font-serif italic text-primary font-bold">"Lắng nghe ngàn xưa vọng lại..."</p>
+             <div className="mt-8 p-6 bg-background-light rounded-2xl border border-gold/10 text-center">
+                <p className="font-serif italic text-primary font-bold text-sm">"Lắng nghe ngàn xưa vọng lại..."</p>
              </div>
           </div>
         </div>
@@ -364,7 +370,6 @@ const Home: React.FC = () => {
                  <div className="h-1.5 w-20 bg-primary"></div>
                  <span className="text-primary font-black uppercase tracking-[0.6em] text-[12px]">Không gian văn hóa</span>
               </div>
-              {/* Sửa line-height và margin để tránh đè chữ */}
               <h2 className="text-5xl sm:text-6xl lg:text-[9rem] font-black text-primary italic uppercase tracking-tighter leading-snug lg:leading-[1.1] mb-6 drop-shadow-sm">
                 BẢN ĐỒ <br/><span className="text-text-main block mt-2 lg:mt-4">54 DÂN TỘC</span>
               </h2>
@@ -565,6 +570,7 @@ export const storiesData: Story[] = [
     ]
   }
 ];
+
 
 export const ethnicData: EthnicGroup[] = [
   { name: "Kinh", location: "TP. Hà Nội", population: 82085826, coords: [21.0285, 105.8542], description: "Dân tộc đa số, giữ vai trò chủ đạo trong việc xây dựng và bảo vệ đất nước Việt Nam.", heritage: "Gốm Bát Tràng, Tranh Đông Hồ, Nón lá Huế.", img: "pictures-54dantoc/kinh.jpg" },

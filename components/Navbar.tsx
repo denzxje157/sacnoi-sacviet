@@ -25,13 +25,13 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <img 
-              src={"pictures-54dantoc/logo.png"} 
-              alt="Logo Sắc Nối" 
+              src="pictures-54dantoc/logo.png"
+              alt="Logo Sắc Việt" 
               className="h-12 w-12 rounded-full object-cover border-2 border-gold shadow-md transition-transform group-hover:scale-110"
             />
             <div className="flex flex-col leading-none">
-              <h1 className="text-xl font-black uppercase tracking-tighter text-primary">SẮC NỐI</h1>
-              <span className="text-[10px] font-bold tracking-[0.3em] text-text-soft group-hover:text-gold transition-colors">SẮC VIỆT</span>
+              <h1 className="text-xl font-black uppercase tracking-tighter text-primary">SẮC VIỆT</h1>
+              <span className="text-[10px] font-bold tracking-[0.1em] text-text-soft group-hover:text-gold transition-colors">Kết nối bản sắc Việt</span>
             </div>
           </Link>
 
@@ -68,10 +68,10 @@ const Navbar: React.FC = () => {
               )}
             </button>
 
-            {/* AI Discovery Button (Active) */}
+            {/* AI Discovery Button (Desktop) */}
             <button 
               onClick={() => setIsChatOpen(!isChatOpen)}
-              className={`hidden rounded-full px-7 py-2.5 text-xs font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 sm:flex items-center gap-2 shadow-lg ${
+              className={`hidden rounded-full px-7 py-2.5 text-xs font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 lg:flex items-center gap-2 shadow-lg ${
                 isChatOpen 
                 ? 'bg-gold text-text-main border border-gold shadow-gold/40' 
                 : 'bg-primary text-white border border-primary/20 shadow-primary/20 hover:bg-gold hover:text-text-main'
@@ -109,19 +109,33 @@ const Navbar: React.FC = () => {
                 <span className="material-symbols-outlined text-gold/50 text-sm">arrow_forward</span>
               </Link>
             ))}
-            <button 
-              onClick={() => { setIsChatOpen(true); setIsMenuOpen(false); }}
-              className="w-full rounded-lg bg-primary py-4 font-black text-white uppercase tracking-widest mt-4 hover:bg-gold transition-colors flex items-center justify-center gap-2"
-            >
-              <span className="material-symbols-outlined">auto_awesome</span>
-              Hỏi Trợ Lý AI
-            </button>
           </div>
         )}
       </header>
 
+      {/* MOBILE FLOATING CHAT BUTTON (Nút Chat nổi trên di động) */}
+      {!isChatOpen && (
+        <button 
+          onClick={() => setIsChatOpen(true)}
+          className="lg:hidden fixed bottom-6 right-6 z-[90] flex items-center gap-3 bg-primary text-white pl-4 pr-5 py-3 rounded-full shadow-2xl border-2 border-gold animate-bounce-slow hover:scale-105 active:scale-95 transition-transform"
+        >
+           <div className="bg-white text-primary rounded-full p-1 shadow-sm">
+             <span className="material-symbols-outlined text-xl">smart_toy</span>
+           </div>
+           <span className="text-xs font-black uppercase tracking-widest drop-shadow-md">Hỏi Già Làng</span>
+        </button>
+      )}
+
       {/* AI Chat Widget */}
       <AIChatWidget isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+      
+      <style>{`
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
+        }
+        .animate-bounce-slow { animation: bounce-slow 3s infinite; }
+      `}</style>
     </>
   );
 };

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { useSearchParams } from 'react-router-dom';
@@ -15,10 +16,6 @@ interface Product {
   sold: number;
   category: string;
 }
-
-// ==========================================
-// DỮ LIỆU SẢN PHẨM & HELPERS
-// ==========================================
 
 // Helper để tạo ảnh giả lập dựa trên tên sản phẩm
 const getImageForProduct = (name: string, index: number) => {
@@ -368,15 +365,16 @@ export const rawData = [
   ]}
 ];
 
-// Mở rộng dữ liệu để có nhiều item hơn cho việc test phân trang
+
+// ... (Giữ nguyên phần logic allProducts và ProductCard) ...
+// Re-calculate allProducts to ensure it uses the imported/defined rawData
 const allProducts: Product[] = rawData.flatMap((grp, grpIdx) => 
   grp.items.map((item: any, idx) => ({
     id: `${grp.e}-${idx}`,
     ethnic: grp.e,
     name: item.n,
     price: item.p,
-    // Sử dụng mô tả chi tiết từ dữ liệu mới, nếu không có thì dùng mô tả mặc định chất lượng cao hơn
-    desc: item.d || `Sản phẩm ${item.n} là kết tinh văn hóa của dân tộc ${grp.e}, được chế tác thủ công tỉ mỉ, mang đậm dấu ấn núi rừng và tâm hồn người bản địa.`,
+    desc: item.d || `Sản phẩm ${item.n} là kết tinh văn hóa của dân tộc ${grp.e}.`,
     artisan: "", 
     exp: `${5 + Math.floor(Math.random() * 20)} năm nghề`,
     sold: Math.floor(Math.random() * 500) + 10,
@@ -385,13 +383,8 @@ const allProducts: Product[] = rawData.flatMap((grp, grpIdx) =>
   }))
 );
 
-// ==========================================
-// COMPONENTS
-// ==========================================
-
 const ProductCard = React.memo(({ product, onOpenDetail }: { product: Product, onOpenDetail: (p: Product) => void }) => (
   <div className="group rounded-2xl md:rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_rgba(209,77,77,0.15)] hover:-translate-y-2 border border-gold/10 bg-white flex flex-col h-full">
-    {/* Tăng chiều cao khung ảnh lên h-72 (khoảng 288px) để ảnh to hơn */}
     <div className="relative h-40 md:h-72 overflow-hidden shrink-0 cursor-pointer bg-[#F9F7F2]" onClick={() => onOpenDetail(product)}>
       <img 
         src={product.img} 
@@ -402,142 +395,120 @@ const ProductCard = React.memo(({ product, onOpenDetail }: { product: Product, o
       <div className="absolute top-2 left-2 md:top-4 md:left-4 bg-primary/90 text-white text-[8px] md:text-[9px] font-black px-2 md:px-4 py-1 md:py-1.5 rounded-full uppercase tracking-widest backdrop-blur-sm border border-gold/30 shadow-md">
         {product.ethnic}
       </div>
-      {/* Overlay "Tìm hiểu" khi hover ảnh */}
       <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
          <span className="bg-white text-primary px-3 md:px-6 py-1.5 md:py-2.5 rounded-full font-black text-[10px] md:text-xs uppercase tracking-widest transform scale-90 group-hover:scale-100 transition-transform shadow-lg hidden md:block">Xem chi tiết</span>
       </div>
     </div>
-    
     <div className="p-3 md:p-6 text-left flex-grow flex flex-col">
-      <h3 
-        className="text-sm md:text-lg font-black text-text-main tracking-tight mb-1 md:mb-2 group-hover:text-primary transition-colors cursor-pointer line-clamp-2 min-h-[2.5rem] md:min-h-[3.5rem]"
-        onClick={() => onOpenDetail(product)}
-      >
-        {product.name}
-      </h3>
-      
+      <h3 className="text-sm md:text-lg font-black text-text-main tracking-tight mb-1 md:mb-2 group-hover:text-primary transition-colors cursor-pointer line-clamp-2 min-h-[2.5rem] md:min-h-[3.5rem]" onClick={() => onOpenDetail(product)}>{product.name}</h3>
       <div className="mt-auto pt-2 md:pt-4 border-t border-gold/5 space-y-2 md:space-y-4">
-        <div className="flex items-center justify-between">
-           <span className="text-primary font-black text-sm md:text-lg">{product.price}</span>
-        </div>
-        
+        <div className="flex items-center justify-between"><span className="text-primary font-black text-sm md:text-lg">{product.price}</span></div>
         <div className="grid grid-cols-2 gap-2 md:gap-3">
-           <button 
-             onClick={() => onOpenDetail(product)}
-             className="border border-gold/30 rounded-lg md:rounded-xl py-2 md:py-2.5 text-[8px] md:text-[10px] font-black uppercase text-text-soft hover:bg-gold/10 transition-colors"
-           >
-             Tìm hiểu
-           </button>
-           <button 
-              onClick={() => onOpenDetail(product)}
-              className="bg-primary rounded-lg md:rounded-xl py-2 md:py-2.5 text-[8px] md:text-[10px] font-black uppercase text-white hover:brightness-110 shadow-lg shadow-primary/20 transition-all active:scale-95"
-            >
-             Đặt mua
-           </button>
+           <button onClick={() => onOpenDetail(product)} className="border border-gold/30 rounded-lg md:rounded-xl py-2 md:py-2.5 text-[8px] md:text-[10px] font-black uppercase text-text-soft hover:bg-gold/10 transition-colors">Tìm hiểu</button>
+           <button onClick={() => onOpenDetail(product)} className="bg-primary rounded-lg md:rounded-xl py-2 md:py-2.5 text-[8px] md:text-[10px] font-black uppercase text-white hover:brightness-110 shadow-lg shadow-primary/20 transition-all active:scale-95">Đặt mua</button>
         </div>
       </div>
     </div>
   </div>
 ));
 
+// --- MODAL ĐÃ TỐI ƯU ---
 const ProductModal = ({ product, onClose }: { product: Product, onClose: () => void }) => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart, toggleCart } = useCart();
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    return () => { document.body.style.overflow = 'unset'; };
   }, []);
 
   const handleAddToCart = () => {
-    for (let i = 0; i < quantity; i++) {
-        addToCart(product);
-    }
+    for (let i = 0; i < quantity; i++) addToCart(product);
     onClose();
   };
 
   const handleBuyNow = () => {
-    for (let i = 0; i < quantity; i++) {
-        addToCart(product);
-    }
+    for (let i = 0; i < quantity; i++) addToCart(product);
     onClose();
     toggleCart(); 
   };
 
   return createPortal(
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 font-display">
-      <div className="absolute inset-0 bg-text-main/80 backdrop-blur-sm animate-fade-in" onClick={onClose}></div>
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 font-display">
+      {/* Backdrop tối để tập trung sự chú ý */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in" onClick={onClose}></div>
       
-      {/* Modal được điều chỉnh: Rất rộng (95vw) và chiều cao cố định (85vh) để vừa vặn màn hình */}
-      <div className="bg-white w-[95vw] h-[85vh] rounded-[2.5rem] shadow-2xl relative z-10 animate-slide-up flex overflow-hidden border-4 border-gold/20 flex-col md:flex-row">
+      {/* Modal Container: KHÔNG full màn hình, có margin, bo góc lớn */}
+      <div className="bg-white w-full max-w-5xl h-[85vh] md:h-auto md:max-h-[90vh] rounded-[2rem] shadow-2xl relative z-10 animate-slide-up flex flex-col md:flex-row overflow-hidden border-4 border-gold/30">
         
-        <button onClick={onClose} className="absolute top-6 right-6 z-50 size-12 rounded-full bg-white/20 hover:bg-primary hover:text-white transition-colors flex items-center justify-center backdrop-blur-md border border-white/40 shadow-lg group">
-          <span className="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform">close</span>
+        {/* Nút Đóng TO RÕ RÀNG */}
+        <button 
+          onClick={onClose} 
+          className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full font-black uppercase text-xs tracking-widest shadow-lg flex items-center gap-2 transition-transform hover:scale-105 active:scale-95 border-2 border-white"
+        >
+          <span>ĐÓNG CỬA SỔ</span>
+          <span className="material-symbols-outlined text-lg">close</span>
         </button>
 
-        {/* Cột Ảnh: Chiếm 70% chiều rộng, rất to cho ảnh ngang */}
-        <div className="w-full md:w-[70%] h-2/5 md:h-full relative bg-[#F2EFE6] group border-b md:border-b-0 md:border-r border-gold/10">
+        {/* Cột Ảnh */}
+        <div className="w-full md:w-[60%] h-1/2 md:h-auto relative bg-[#F2EFE6] border-b md:border-b-0 md:border-r border-gold/10">
           <img src={product.img} alt={product.name} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          <div className="absolute bottom-4 left-4 text-white">
+             <span className="bg-primary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-white/30 shadow-sm inline-block mb-2">Dân tộc {product.ethnic}</span>
+          </div>
         </div>
 
-        {/* Cột Thông tin: Chiếm 30% còn lại, có thanh cuộn riêng */}
-        <div className="w-full md:w-[30%] h-3/5 md:h-full flex flex-col bg-white relative">
-          <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-8 lg:p-10">
-             <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-full mb-4 border border-primary/20">
-               Dân tộc {product.ethnic}
-             </div>
-             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-text-main leading-tight mb-3">{product.name}</h2>
-             <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gold/10">
+        {/* Cột Thông tin: Có thanh cuộn */}
+        <div className="w-full md:w-[40%] h-1/2 md:h-auto flex flex-col bg-white">
+          <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-8">
+             <h2 className="text-2xl md:text-3xl font-black text-text-main leading-tight mb-2 mt-2">{product.name}</h2>
+             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gold/10">
                 <span className="text-xl md:text-2xl font-black text-primary">{product.price}</span>
-                <div className="flex items-center gap-1 text-gold">
-                   {[1,2,3,4,5].map(i => <span key={i} className="material-symbols-outlined text-xs md:text-sm font-variation-settings: 'FILL' 1">star</span>)}
-                   <span className="text-text-soft text-xs font-bold ml-1">({product.sold})</span>
-                </div>
+                <span className="text-xs text-text-soft font-bold bg-gold/10 px-2 py-1 rounded">Đã bán: {product.sold}</span>
              </div>
              
-             <div className="prose prose-sm text-text-soft">
-               <h4 className="font-black text-text-main uppercase text-xs mb-3 flex items-center gap-2">
-                 <span className="w-1 h-4 bg-gold rounded-full"></span>
-                 Câu chuyện sản phẩm
-               </h4>
-               <p className="italic leading-relaxed opacity-90 text-justify text-sm">"{product.desc}"</p>
+             <div className="space-y-4">
+               <div className="bg-background-light p-4 rounded-xl border border-gold/10">
+                 <h4 className="font-bold text-primary uppercase text-xs mb-2 flex items-center gap-2">
+                   <span className="material-symbols-outlined text-base">auto_stories</span>
+                   Câu chuyện sản phẩm
+                 </h4>
+                 <p className="text-text-main text-sm leading-relaxed text-justify font-medium">"{product.desc}"</p>
+               </div>
                
-               <div className="mt-6 p-4 bg-background-light rounded-xl border border-gold/10">
-                  <p className="text-[10px] font-black uppercase text-bronze mb-2 flex items-center gap-2">
-                    <span className="material-symbols-outlined text-sm text-primary">verified</span>
-                    Cam kết từ Sắc Nối
-                  </p>
-                  <p className="text-xs leading-relaxed text-text-main/80">Sản phẩm thủ công 100%, hỗ trợ sinh kế trực tiếp cho nghệ nhân bản địa.</p>
+               <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3 border border-gold/10 rounded-xl bg-white text-center">
+                    <p className="text-[9px] uppercase text-bronze font-bold mb-1">Nghệ nhân</p>
+                    <p className="text-xs font-black text-text-main">Bản địa</p>
+                  </div>
+                  <div className="p-3 border border-gold/10 rounded-xl bg-white text-center">
+                    <p className="text-[9px] uppercase text-bronze font-bold mb-1">Kinh nghiệm</p>
+                    <p className="text-xs font-black text-text-main">{product.exp}</p>
+                  </div>
                </div>
              </div>
           </div>
 
-          {/* Footer của Modal (Nút mua hàng) */}
-          <div className="p-4 md:p-6 border-t border-gold/10 bg-white shrink-0 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-10">
-             <div className="flex items-center justify-between mb-4">
-                <span className="font-black text-text-main text-xs uppercase tracking-widest">Số lượng:</span>
-                <div className="flex items-center gap-3 bg-background-light rounded-full px-3 py-1.5 border border-gold/20">
-                   <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="text-text-soft hover:text-primary w-6 h-6 flex items-center justify-center">-</button>
-                   <span className="font-black w-6 text-center text-sm">{quantity}</span>
-                   <button onClick={() => setQuantity(quantity + 1)} className="text-text-soft hover:text-primary w-6 h-6 flex items-center justify-center">+</button>
+          {/* Footer Modal */}
+          <div className="p-4 bg-white border-t border-gold/10 shrink-0 shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
+             <div className="flex items-center justify-between mb-3 bg-background-light p-2 rounded-xl border border-gold/10">
+                <span className="text-xs font-bold text-text-soft ml-2">Số lượng:</span>
+                <div className="flex items-center gap-3">
+                   <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="size-8 bg-white rounded-lg border border-gold/10 flex items-center justify-center hover:bg-primary hover:text-white transition-colors text-lg font-bold">-</button>
+                   <span className="w-6 text-center font-black">{quantity}</span>
+                   <button onClick={() => setQuantity(quantity + 1)} className="size-8 bg-white rounded-lg border border-gold/10 flex items-center justify-center hover:bg-primary hover:text-white transition-colors text-lg font-bold">+</button>
                 </div>
              </div>
              
-             <div className="grid grid-cols-5 gap-3">
-                <button 
-                  onClick={handleAddToCart}
-                  className="col-span-2 py-3.5 rounded-xl border-2 border-primary text-primary font-black uppercase text-[10px] tracking-widest hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2"
-                >
+             <div className="flex gap-2">
+                <button onClick={handleAddToCart} className="flex-1 py-3 rounded-xl border-2 border-primary text-primary font-black uppercase text-[10px] tracking-widest hover:bg-primary/5 transition-colors flex items-center justify-center gap-2">
                    <span className="material-symbols-outlined text-lg">add_shopping_cart</span>
+                   Thêm giỏ
                 </button>
-                <button 
-                  onClick={handleBuyNow}
-                  className="col-span-3 py-3.5 rounded-xl bg-primary text-white font-black uppercase text-[10px] tracking-widest hover:brightness-110 shadow-xl shadow-primary/20 transition-all flex items-center justify-center gap-2"
-                >
-                   Đặt hàng ngay
+                <button onClick={handleBuyNow} className="flex-[1.5] py-3 rounded-xl bg-primary text-white font-black uppercase text-[10px] tracking-widest hover:brightness-110 shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+                   Mua ngay
+                   <span className="material-symbols-outlined text-lg">arrow_forward</span>
                 </button>
              </div>
           </div>
@@ -548,31 +519,21 @@ const ProductModal = ({ product, onClose }: { product: Product, onClose: () => v
   );
 };
 
-// --- MAIN COMPONENT ---
-
+// ... (Phần Main Component Marketplace giữ nguyên logic, chỉ thay thế ProductModal mới) ...
 const Marketplace: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialEthnic = (searchParams.get('ethnic') || 'TẤT CẢ').toUpperCase();
-  
   const [selectedEthnic, setSelectedEthnic] = useState<string>(initialEthnic);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  
   const scrollRef = useRef<HTMLDivElement>(null);
-  
-  // Cấu hình: 12 sản phẩm/trang
   const ITEMS_PER_PAGE = 12;
 
-  useEffect(() => {
-    setSelectedEthnic(initialEthnic);
-    setCurrentPage(1);
-  }, [initialEthnic]);
+  useEffect(() => { setSelectedEthnic(initialEthnic); setCurrentPage(1); }, [initialEthnic]);
 
   const handleEthnicSelect = useCallback((ethnic: string) => {
-    setSelectedEthnic(ethnic);
-    setSearchParams({ ethnic });
-    setCurrentPage(1);
+    setSelectedEthnic(ethnic); setSearchParams({ ethnic }); setCurrentPage(1);
   }, [setSearchParams]);
 
   const ethnicList = useMemo(() => {
@@ -582,15 +543,10 @@ const Marketplace: React.FC = () => {
 
   const filteredProducts = useMemo(() => {
     let result = allProducts;
-    if (selectedEthnic !== 'TẤT CẢ') {
-      result = result.filter(p => p.ethnic === selectedEthnic);
-    }
+    if (selectedEthnic !== 'TẤT CẢ') result = result.filter(p => p.ethnic === selectedEthnic);
     if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase();
-      result = result.filter(p => 
-        p.name.toLowerCase().includes(term) || 
-        p.ethnic.toLowerCase().includes(term)
-      );
+      result = result.filter(p => p.name.toLowerCase().includes(term) || p.ethnic.toLowerCase().includes(term));
     }
     return result;
   }, [selectedEthnic, searchTerm]);
@@ -606,109 +562,83 @@ const Marketplace: React.FC = () => {
     window.scrollTo({ top: 400, behavior: 'smooth' });
   };
 
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen font-display bg-background-light relative overflow-x-hidden">
-      
-      {/* Decorative Side Patterns (Fixed) */}
       <div className="fixed left-0 top-0 bottom-0 w-32 bg-[url('https://www.transparenttextures.com/patterns/black-scales.png')] opacity-[0.03] pointer-events-none hidden 2xl:block mix-blend-multiply z-0"></div>
       <div className="fixed right-0 top-0 bottom-0 w-32 bg-[url('https://www.transparenttextures.com/patterns/black-scales.png')] opacity-[0.03] pointer-events-none hidden 2xl:block mix-blend-multiply z-0"></div>
 
-      {selectedProduct && (
-        <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
-      )}
+      {selectedProduct && <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
 
-      {/* Main Container expanded to 96% width for large screens */}
       <div className="w-[96%] max-w-[1920px] mx-auto px-4 py-8 md:py-12 relative z-10">
-        
-        {/* Banner Hero */}
         <section className="relative rounded-[2rem] md:rounded-[3.5rem] overflow-hidden mb-8 md:mb-12 h-48 md:h-80 flex items-center shadow-2xl border-4 border-white">
-          <div 
-            className="absolute inset-0 bg-cover bg-center" 
-            style={{backgroundImage: "url('https://topsapa.vn/uploads/2023/04/07/nguoi-dan-o-cho-phien-bac-ha-rat-chat-phac-va-gian-di-mac-nh_cufz0_042151300.png')"}}
-          >
+          <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "url('https://topsapa.vn/uploads/2023/04/07/nguoi-dan-o-cho-phien-bac-ha-rat-chat-phac-va-gian-di-mac-nh_cufz0_042151300.png')"}}>
             <div className="absolute inset-0 bg-primary/70 mix-blend-multiply"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/40 to-transparent"></div>
           </div>
-          
           <div className="relative z-10 px-6 md:px-16 max-w-3xl text-left">
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-white mb-2 md:mb-4 italic uppercase tracking-tighter drop-shadow-2xl">
-              CHỢ <span className="text-gold">PHIÊN</span>
-            </h2>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-white mb-2 md:mb-4 italic uppercase tracking-tighter drop-shadow-2xl">CHỢ <span className="text-gold">PHIÊN</span></h2>
             <div className="flex items-start gap-4">
                <div className="w-1 md:w-1.5 h-8 md:h-12 bg-gold/80 rounded-full mt-1 shrink-0"></div>
-               <p className="text-white text-xs md:text-xl lg:text-2xl font-bold italic tracking-tight opacity-90 drop-shadow-md leading-tight">
-                 "Kết nối di sản với thương mại công bằng cho các nghệ nhân dân tộc thiểu số vùng cao Việt Nam."
-               </p>
+               <p className="text-white text-xs md:text-xl lg:text-2xl font-bold italic tracking-tight opacity-90 drop-shadow-md leading-tight">"Kết nối di sản với thương mại công bằng cho các nghệ nhân dân tộc thiểu số vùng cao Việt Nam."</p>
             </div>
           </div>
         </section>
 
-        {/* Filter & Search Toolbar */}
         <div className="sticky top-20 md:top-24 z-40 mb-6 md:mb-10 space-y-4 md:space-y-6">
-          {/* Search */}
           <div className="max-w-3xl mx-auto relative group">
-            <input 
-              type="text" 
-              placeholder="Tìm kiếm sản phẩm..." 
-              value={searchTerm}
-              onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-              className="w-full bg-white/95 backdrop-blur border-2 border-gold/20 rounded-full py-3 md:py-4 px-8 pl-12 md:pl-14 text-text-main shadow-xl text-sm md:text-lg font-medium focus:outline-none focus:border-primary transition-all"
-            />
+            <input type="text" placeholder="Tìm kiếm sản phẩm..." value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }} className="w-full bg-white/95 backdrop-blur border-2 border-gold/20 rounded-full py-3 md:py-4 px-8 pl-12 md:pl-14 text-text-main shadow-xl text-sm md:text-lg font-medium focus:outline-none focus:border-primary transition-all" />
             <span className="material-symbols-outlined absolute left-4 md:left-5 top-1/2 -translate-y-1/2 text-gold text-xl md:text-2xl">search</span>
           </div>
+          
+          {/* Bộ lọc dân tộc với nút điều hướng */}
+          <div className="bg-white/90 backdrop-blur p-2 rounded-2xl md:rounded-[2.5rem] border border-gold/20 shadow-lg flex items-center max-w-[95vw] md:max-w-[90vw] mx-auto group">
+             {/* Nút Trái */}
+             <button onClick={scrollLeft} className="p-2 hover:bg-gold/10 rounded-full text-gold transition-colors shrink-0" aria-label="Cuộn trái">
+                <span className="material-symbols-outlined">chevron_left</span>
+             </button>
 
-          {/* Ethnic Filter (Responsive) */}
-          <div className="bg-white/90 backdrop-blur p-2 rounded-2xl md:rounded-[2.5rem] border border-gold/20 shadow-lg flex items-center max-w-[95vw] md:max-w-[90vw] mx-auto">
-             <div className="pl-4 md:pl-6 pr-4 hidden md:flex items-center gap-2 border-r border-gold/10 text-primary">
+             <div className="pl-2 pr-4 hidden md:flex items-center gap-2 border-r border-gold/10 text-primary shrink-0">
                 <span className="material-symbols-outlined">filter_list</span>
                 <span className="font-black text-xs uppercase tracking-widest whitespace-nowrap">Bộ lọc dân tộc</span>
              </div>
-             <div ref={scrollRef} className="flex-1 flex overflow-x-auto gap-2 px-2 custom-scrollbar-h py-2 scroll-smooth">
+             
+             <div ref={scrollRef} className="flex-1 flex overflow-x-auto gap-2 px-2 custom-scrollbar-h py-2 scroll-smooth no-scrollbar">
                 {ethnicList.map(ethnic => (
-                  <button
-                    key={ethnic}
-                    onClick={() => handleEthnicSelect(ethnic)}
-                    className={`px-4 md:px-6 py-2 md:py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap border ${
-                      selectedEthnic === ethnic 
-                      ? 'bg-primary border-primary text-white shadow-md' 
-                      : 'bg-transparent border-transparent text-text-soft hover:bg-gold/10'
-                    }`}
-                  >
-                    {ethnic}
-                  </button>
+                  <button key={ethnic} onClick={() => handleEthnicSelect(ethnic)} className={`px-4 md:px-6 py-2 md:py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap border shrink-0 ${selectedEthnic === ethnic ? 'bg-primary border-primary text-white shadow-md' : 'bg-transparent border-transparent text-text-soft hover:bg-gold/10'}`}>{ethnic}</button>
                 ))}
              </div>
+
+             {/* Nút Phải */}
+             <button onClick={scrollRight} className="p-2 hover:bg-gold/10 rounded-full text-gold transition-colors shrink-0" aria-label="Cuộn phải">
+                <span className="material-symbols-outlined">chevron_right</span>
+             </button>
           </div>
         </div>
 
-        {/* Results Title */}
         <div className="mb-6 md:mb-8 flex flex-col sm:flex-row sm:items-center justify-between px-2 md:px-4 gap-4">
            <div className="flex items-center gap-3">
-              <h3 className="text-lg md:text-2xl font-black text-text-main uppercase tracking-tighter italic">
-                {selectedEthnic === 'TẤT CẢ' ? 'Toàn bộ di sản' : `Dân tộc ${selectedEthnic}`}
-              </h3>
-              <span className="bg-gold/20 text-text-main text-[10px] font-black px-2 py-0.5 rounded-md">
-                {filteredProducts.length}
-              </span>
+              <h3 className="text-lg md:text-2xl font-black text-text-main uppercase tracking-tighter italic">{selectedEthnic === 'TẤT CẢ' ? 'Toàn bộ di sản' : `Dân tộc ${selectedEthnic}`}</h3>
+              <span className="bg-gold/20 text-text-main text-[10px] font-black px-2 py-0.5 rounded-md">{filteredProducts.length}</span>
            </div>
-           
-           <div className="text-[10px] md:text-xs font-bold text-bronze uppercase tracking-widest">
-              Trang {currentPage} / {totalPages > 0 ? totalPages : 1}
-           </div>
+           <div className="text-[10px] md:text-xs font-bold text-bronze uppercase tracking-widest">Trang {currentPage} / {totalPages > 0 ? totalPages : 1}</div>
         </div>
 
-        {/* Product Grid - Layout Responsive Cải Thiện */}
-        {/* grid-cols-2: Mobile (2 sản phẩm) */}
-        {/* md:grid-cols-3: Tablet/Large Phone/Ngang (3 sản phẩm) */}
-        {/* lg:grid-cols-4: Desktop (4 sản phẩm) */}
-        {/* Added 'content-start' to fix stretching when few items */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8 min-h-[600px] content-start">
-          {currentProducts.map((p) => (
-            <ProductCard key={p.id} product={p} onOpenDetail={setSelectedProduct} />
-          ))}
+          {currentProducts.map((p) => <ProductCard key={p.id} product={p} onOpenDetail={setSelectedProduct} />)}
         </div>
         
-        {/* Empty State */}
         {currentProducts.length === 0 && (
           <div className="py-20 text-center bg-white/50 rounded-[3rem] border-2 border-dashed border-gold/20">
              <span className="material-symbols-outlined text-6xl text-gold/30 mb-4">storefront</span>
@@ -717,72 +647,35 @@ const Marketplace: React.FC = () => {
           </div>
         )}
 
-        {/* Pagination Controls */}
         {totalPages > 1 && (
           <div className="mt-8 md:mt-16 flex items-center justify-center gap-2 pb-20 lg:pb-0">
-            <button 
-              onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-              className="size-8 md:size-10 rounded-full flex items-center justify-center border border-gold/20 bg-white text-primary disabled:opacity-30 disabled:cursor-not-allowed hover:bg-primary hover:text-white transition-colors"
-            >
-              <span className="material-symbols-outlined text-lg">chevron_left</span>
-            </button>
-            
+            <button onClick={() => handlePageChange(Math.max(1, currentPage - 1))} disabled={currentPage === 1} className="size-8 md:size-10 rounded-full flex items-center justify-center border border-gold/20 bg-white text-primary disabled:opacity-30 disabled:cursor-not-allowed hover:bg-primary hover:text-white transition-colors"><span className="material-symbols-outlined text-lg">chevron_left</span></button>
             <div className="flex gap-1 md:gap-2 mx-2 md:mx-4">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
                  if (page !== 1 && page !== totalPages && Math.abs(currentPage - page) > 1) {
                    if (Math.abs(currentPage - page) === 2) return <span key={page} className="text-gold/50 font-bold self-end text-xs">...</span>;
                    return null;
                  }
-                 
-                 return (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`size-8 md:size-10 rounded-full flex items-center justify-center text-[10px] md:text-xs font-black transition-all ${
-                      currentPage === page 
-                      ? 'bg-primary text-white shadow-lg scale-110' 
-                      : 'bg-white border border-gold/10 text-text-soft hover:border-gold/50'
-                    }`}
-                  >
-                    {page}
-                  </button>
-                 );
+                 return <button key={page} onClick={() => handlePageChange(page)} className={`size-8 md:size-10 rounded-full flex items-center justify-center text-[10px] md:text-xs font-black transition-all ${currentPage === page ? 'bg-primary text-white shadow-lg scale-110' : 'bg-white border border-gold/10 text-text-soft hover:border-gold/50'}`}>{page}</button>;
               })}
             </div>
-
-            <button 
-              onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
-              disabled={currentPage === totalPages}
-              className="size-8 md:size-10 rounded-full flex items-center justify-center border border-gold/20 bg-white text-primary disabled:opacity-30 disabled:cursor-not-allowed hover:bg-primary hover:text-white transition-colors"
-            >
-              <span className="material-symbols-outlined text-lg">chevron_right</span>
-            </button>
+            <button onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))} disabled={currentPage === totalPages} className="size-8 md:size-10 rounded-full flex items-center justify-center border border-gold/20 bg-white text-primary disabled:opacity-30 disabled:cursor-not-allowed hover:bg-primary hover:text-white transition-colors"><span className="material-symbols-outlined text-lg">chevron_right</span></button>
           </div>
         )}
-
         <div className="h-24"></div>
       </div>
-
       <style>{`
-        /* Ẩn scrollbar ngang cho menu mobile nhưng vẫn scroll được */
         .custom-scrollbar-h::-webkit-scrollbar { height: 0px; background: transparent; }
-        
-        .custom-scrollbar-h::-webkit-scrollbar { height: 4px; }
-        .custom-scrollbar-h::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar-h::-webkit-scrollbar-thumb { background: #D14D4D; border-radius: 10px; }
-        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
         @keyframes slide-up { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .animate-slide-up { animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #D14D4D; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #A11D1D; border-radius: 10px; }
       `}</style>
     </div>
   );
 };
-
-// Export rawData để Chatbot sử dụng
 export { rawData as marketplaceData };
 export default Marketplace;

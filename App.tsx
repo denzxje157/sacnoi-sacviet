@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar.tsx';
 import Home from './pages/Home.tsx';
@@ -7,7 +8,6 @@ import Marketplace from './pages/Marketplace.tsx';
 import Library from './pages/Library.tsx';
 import Community from './pages/Community.tsx';
 import Footer from './components/Footer.tsx';
-import AIChatWidget from "./components/AIChatWidget.tsx";
 import { CartProvider } from './context/CartContext.tsx';
 import CartDrawer from './components/CartDrawer.tsx';
 
@@ -37,7 +37,6 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const App: React.FC = () => {
-  const [showChat, setShowChat] = useState(false);
   return (
     <CartProvider>
       <Router>
@@ -58,25 +57,6 @@ const App: React.FC = () => {
           </main>
           <Footer />
         </div>
-        
-        {/* Chatbot */}
-
-        {/* Nút Khám phá AI */}
-          <button
-            onClick={() => setShowChat(true)}
-            className="fixed bottom-6 right-6 bg-primary text-white px-4 py-2 rounded-full shadow-lg z-[150] flex items-center gap-2"
-          >
-            <span className="material-symbols-outlined">auto_awesome</span>
-            Khám phá AI
-          </button>
-
-          {/* Chatbot */}
-          <AIChatWidget
-            isOpen={showChat}
-            onClose={() => setShowChat(false)}
-          />
-
-
         <style>{`
           @keyframes fade-in-page {
             from { opacity: 0; transform: translateY(10px); }

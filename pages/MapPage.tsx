@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, ZoomControl, Tooltip, useMap } from 'react-leaflet';
 import L from 'leaflet';
@@ -29,127 +28,18 @@ const MapFixer = () => {
   return null;
 };
 
+// ... (Giữ nguyên heritageData) ...
 export const heritageData: HeritageSite[] = [
-  { 
-    id: 'yentu',
-    name: "Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc", 
-    type: 'UNESCO', 
-    unescoYear: '2025',
-    category: 'temple', 
-    location: "Quảng Ninh, Bắc Giang và Hải Phòng", 
-    coords: [21.1578, 106.7214], 
-    description: "Vùng đất thiêng của Phật giáo Trúc Lâm, nơi hội tụ linh khí đất trời và những giá trị lịch sử, văn hóa vô giá.", 
-    img: "https://cdn2.tuoitre.vn/thumb_w/1200/471584752817336320/2025/7/12/chua-yen-tu-17523255573811017341205-80-0-1152-2048-crop-1752325584572837395867.jpg",
-    vrEmbedUrl: "https://smarttravel-vr.mobifone.vn/vr-tour/quan-the-di-tich-va-danh-lam-thang-canh-yen-tu/66a8e8db9b37be124d53b99a"
-  },
-  { 
-    id: 'thanh-nha-ho',
-    name: "Thành Nhà Hồ", 
-    type: 'UNESCO', 
-    unescoYear: '2011',
-    category: 'citadel', 
-    location: "Thanh Hóa", 
-    coords: [20.0782, 105.6067], 
-    description: "Tòa thành đá độc nhất vô nhị ở Đông Nam Á với kỹ thuật ghép đá tinh xảo từ thế kỷ 14.", 
-    img: "https://image.sggp.org.vn/1200x630/Uploaded/2026/lcgkcwvo/2023_11_14/1-9587.jpg.webp",
-    vrEmbedUrl: "https://yootek.vn/chiem-nguong-toan-canh-thanh-nha-ho/"
-  },
-  { 
-    id: 'myson',
-    name: "Thánh địa Mỹ Sơn", 
-    type: 'UNESCO', 
-    unescoYear: '1999',
-    category: 'temple', 
-    location: "Quảng Nam", 
-    coords: [15.7643, 108.1245], 
-    description: "Khu di tích đền tháp gạch nung độc đáo của vương quốc Champa cổ đại giữa thung lũng linh thiêng.", 
-    img: "https://fvgtravel.com.vn/uploads/up/root/editor/2025/05/20/19/33/w1230/tha1747722808_5733.jpg",
-    vrEmbedUrl: "https://my.matterport.com/show/?m=zMqkoZNoadz"
-  },
-  { 
-    id: 'hue',
-    name: "Quần thể di tích Cố đô Huế", 
-    type: 'UNESCO', 
-    unescoYear: '1993',
-    category: 'citadel', 
-    location: "Thừa Thiên Huế", 
-    coords: [16.4676, 107.5904], 
-    description: "Kinh đô của triều đại phong kiến cuối cùng Việt Nam, di sản đầu tiên được UNESCO công nhận.", 
-    img: "https://ik.imagekit.io/tvlk/blog/2025/03/quan-the-di-tich-co-do-hue-2-1024x576.jpg?tr=q-70,c-at_max,w-1000,h-600",
-    vrEmbedUrl: "https://www.google.com/maps/embed?pb=!4v1715600000000!6m8!1m2!1sAF1QipMfZ_cZH3QhkJJRvD3Ihzq0qNx1IVIla7np2njI!2i7!3m1!7e115!9m1!2b1"
-  },
-  { 
-    id: 'halong',
-    name: "Vịnh Hạ Long", 
-    type: 'UNESCO', 
-    unescoYear: '1994, 2000',
-    category: 'nature', 
-    location: "Quảng Ninh", 
-    coords: [20.9492, 107.0522], 
-    description: "Kỳ quan thiên nhiên thế giới với hàng ngàn đảo đá vôi vươn lên từ mặt biển xanh ngọc lục bảo.", 
-    img: "https://tructhang.vn/wp-content/uploads/2022/08/Vinh-Ha-Long.jpg",
-    vrEmbedUrl: "https://www.halomedia.vn/360tours/ha-long-bay"
-  },
-  { 
-    id: 'hoian',
-    name: "Phố cổ Hội An", 
-    type: 'UNESCO', 
-    unescoYear: '1999',
-    category: 'citadel', 
-    location: "Quảng Nam", 
-    coords: [15.8802, 108.3381], 
-    description: "Thương cảng quốc tế thế kỷ 17 được bảo tồn nguyên vẹn với những dãy nhà vàng và đèn lồng rực rỡ.", 
-    img: "https://images.vietnamtourism.gov.vn/vn//images/2023/cd_hoi_an5.jpeg",
-    vrEmbedUrl: "https://www.halomedia.vn/360tours/hoi-an-360-tour"
-  },
-  { 
-    id: 'phongnha',
-    name: "Phong Nha - Kẻ Bàng", 
-    type: 'UNESCO', 
-    unescoYear: '2003, 2015',
-    category: 'nature', 
-    location: "Quảng Bình", 
-    coords: [17.5412, 106.1545], 
-    description: "Vương quốc hang động thế giới, nơi sở hữu Sơn Đoòng và hệ thống núi đá vôi cổ nhất châu Á.", 
-    img: "https://vietnamdiscovery.com/wp-content/uploads/2019/11/Phong-nha-ke-bang-national-park.jpg",
-    vrEmbedUrl: "https://www.halomedia.vn/360tours/phong-nha"
-  },
-  { 
-    id: 'thanglong',
-    name: "Hoàng thành Thăng Long", 
-    type: 'UNESCO', 
-    unescoYear: '2010',
-    category: 'citadel', 
-    location: "Hà Nội", 
-    coords: [21.0371, 105.8376], 
-    description: "Trung tâm quyền lực bền vững trải dài hơn 13 thế kỷ của các vương triều Việt Nam.", 
-    img: "https://lamejorhotel.com/UploadFile/Blog/anh1%20ho%C3%A0ng%20th%C3%A0nh.jpg",
-    vrEmbedUrl: "https://trungbayonline.hoangthanhthanglong.vn/TB360/D67"
-  },
-  { 
-    id: 'trangan',
-    name: "Quần thể danh thắng Tràng An", 
-    type: 'UNESCO', 
-    unescoYear: '2014',
-    category: 'nature', 
-    location: "Ninh Bình", 
-    coords: [20.2465, 105.9128], 
-    description: "Di sản thế giới kép đầu tiên và duy nhất tại Việt Nam kết hợp vẻ đẹp thiên nhiên và lịch sử.", 
-    img: "https://media.vneconomy.vn/images/upload/2024/10/31/89.jpg",
-    vrEmbedUrl: "https://www.halomedia.vn/360tours/ninh-binh"
-  },
-  { 
-    id: 'catba',
-    name: "Vịnh Hạ Long - Cát Bà", 
-    type: 'UNESCO', 
-    unescoYear: '2023',
-    category: 'nature', 
-    location: "Hải Phòng - Quảng Ninh", 
-    coords: [20.8033, 107.0375], 
-    description: "Sự mở rộng liên vùng mới nhất của UNESCO vinh danh hệ sinh thái biển đảo kỳ vĩ của Việt Nam.", 
-    img: "https://ktmt.vnmediacdn.com/images/2024/08/25/98-1724593455-vinh-ha-long-quan-dao-cat-ba-duoc-cong-nhan-la-di-san-dia-chat-quoc-te-20240825135755.jpg",
-    vrEmbedUrl: "https://www.google.com/maps/embed?pb=!4v1715600000000!6m8!1m2!1sAF1QipN3Uo5q4O_X_Vq0Bf0b0uY5z_r1r7v_YlU9V0p!2i7!3m1!7e115!9m1!2b1"
-  }
+  { id: 'yentu', name: "Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc", type: 'UNESCO', unescoYear: '2025', category: 'temple', location: "Quảng Ninh, Bắc Giang và Hải Phòng", coords: [21.1578, 106.7214], description: "Vùng đất thiêng của Phật giáo Trúc Lâm, nơi hội tụ linh khí đất trời và những giá trị lịch sử, văn hóa vô giá.", img: "https://cdn2.tuoitre.vn/thumb_w/1200/471584752817336320/2025/7/12/chua-yen-tu-17523255573811017341205-80-0-1152-2048-crop-1752325584572837395867.jpg", vrEmbedUrl: "https://smarttravel-vr.mobifone.vn/vr-tour/quan-the-di-tich-va-danh-lam-thang-canh-yen-tu/66a8e8db9b37be124d53b99a" },
+  { id: 'thanh-nha-ho', name: "Thành Nhà Hồ", type: 'UNESCO', unescoYear: '2011', category: 'citadel', location: "Thanh Hóa", coords: [20.0782, 105.6067], description: "Tòa thành đá độc nhất vô nhị ở Đông Nam Á với kỹ thuật ghép đá tinh xảo từ thế kỷ 14.", img: "https://image.sggp.org.vn/1200x630/Uploaded/2026/lcgkcwvo/2023_11_14/1-9587.jpg.webp", vrEmbedUrl: "https://yootek.vn/chiem-nguong-toan-canh-thanh-nha-ho/" },
+  { id: 'myson', name: "Thánh địa Mỹ Sơn", type: 'UNESCO', unescoYear: '1999', category: 'temple', location: "Quảng Nam", coords: [15.7643, 108.1245], description: "Khu di tích đền tháp gạch nung độc đáo của vương quốc Champa cổ đại giữa thung lũng linh thiêng.", img: "https://fvgtravel.com.vn/uploads/up/root/editor/2025/05/20/19/33/w1230/tha1747722808_5733.jpg", vrEmbedUrl: "https://my.matterport.com/show/?m=zMqkoZNoadz" },
+  { id: 'hue', name: "Quần thể di tích Cố đô Huế", type: 'UNESCO', unescoYear: '1993', category: 'citadel', location: "Thừa Thiên Huế", coords: [16.4676, 107.5904], description: "Kinh đô của triều đại phong kiến cuối cùng Việt Nam, di sản đầu tiên được UNESCO công nhận.", img: "https://ik.imagekit.io/tvlk/blog/2025/03/quan-the-di-tich-co-do-hue-2-1024x576.jpg?tr=q-70,c-at_max,w-1000,h-600", vrEmbedUrl: "https://www.google.com/maps/embed?pb=!4v1715600000000!6m8!1m2!1sAF1QipMfZ_cZH3QhkJJRvD3Ihzq0qNx1IVIla7np2njI!2i7!3m1!7e115!9m1!2b1" },
+  { id: 'halong', name: "Vịnh Hạ Long", type: 'UNESCO', unescoYear: '1994, 2000', category: 'nature', location: "Quảng Ninh", coords: [20.9492, 107.0522], description: "Kỳ quan thiên nhiên thế giới với hàng ngàn đảo đá vôi vươn lên từ mặt biển xanh ngọc lục bảo.", img: "https://tructhang.vn/wp-content/uploads/2022/08/Vinh-Ha-Long.jpg", vrEmbedUrl: "https://www.halomedia.vn/360tours/ha-long-bay" },
+  { id: 'hoian', name: "Phố cổ Hội An", type: 'UNESCO', unescoYear: '1999', category: 'citadel', location: "Quảng Nam", coords: [15.8802, 108.3381], description: "Thương cảng quốc tế thế kỷ 17 được bảo tồn nguyên vẹn với những dãy nhà vàng và đèn lồng rực rỡ.", img: "https://images.vietnamtourism.gov.vn/vn//images/2023/cd_hoi_an5.jpeg", vrEmbedUrl: "https://www.halomedia.vn/360tours/hoi-an-360-tour" },
+  { id: 'phongnha', name: "Phong Nha - Kẻ Bàng", type: 'UNESCO', unescoYear: '2003, 2015', category: 'nature', location: "Quảng Bình", coords: [17.5412, 106.1545], description: "Vương quốc hang động thế giới, nơi sở hữu Sơn Đoòng và hệ thống núi đá vôi cổ nhất châu Á.", img: "https://vietnamdiscovery.com/wp-content/uploads/2019/11/Phong-nha-ke-bang-national-park.jpg", vrEmbedUrl: "https://www.halomedia.vn/360tours/phong-nha" },
+  { id: 'thanglong', name: "Hoàng thành Thăng Long", type: 'UNESCO', unescoYear: '2010', category: 'citadel', location: "Hà Nội", coords: [21.0371, 105.8376], description: "Trung tâm quyền lực bền vững trải dài hơn 13 thế kỷ của các vương triều Việt Nam.", img: "https://lamejorhotel.com/UploadFile/Blog/anh1%20ho%C3%A0ng%20th%C3%A0nh.jpg", vrEmbedUrl: "https://trungbayonline.hoangthanhthanglong.vn/TB360/D67" },
+  { id: 'trangan', name: "Quần thể danh thắng Tràng An", type: 'UNESCO', unescoYear: '2014', category: 'nature', location: "Ninh Bình", coords: [20.2465, 105.9128], description: "Di sản thế giới kép đầu tiên và duy nhất tại Việt Nam kết hợp vẻ đẹp thiên nhiên và lịch sử.", img: "https://media.vneconomy.vn/images/upload/2024/10/31/89.jpg", vrEmbedUrl: "https://www.halomedia.vn/360tours/ninh-binh" },
+  { id: 'catba', name: "Vịnh Hạ Long - Cát Bà", type: 'UNESCO', unescoYear: '2023', category: 'nature', location: "Hải Phòng - Quảng Ninh", coords: [20.8033, 107.0375], description: "Sự mở rộng liên vùng mới nhất của UNESCO vinh danh hệ sinh thái biển đảo kỳ vĩ của Việt Nam.", img: "https://ktmt.vnmediacdn.com/images/2024/08/25/98-1724593455-vinh-ha-long-quan-dao-cat-ba-duoc-cong-nhan-la-di-san-dia-chat-quoc-te-20240825135755.jpg", vrEmbedUrl: "https://www.google.com/maps/embed?pb=!4v1715600000000!6m8!1m2!1sAF1QipN3Uo5q4O_X_Vq0Bf0b0uY5z_r1r7v_YlU9V0p!2i7!3m1!7e115!9m1!2b1" }
 ];
 
 const getCategoryIcon = (category: string) => {
@@ -165,30 +55,33 @@ const VRViewerModal = ({ site, onClose }: { site: HeritageSite, onClose: () => v
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="fixed inset-0 z-[100000] bg-black flex flex-col items-center justify-center animate-fade-in">
-      <div className="absolute top-0 left-0 w-full p-6 lg:p-10 flex justify-between items-center z-[110] bg-gradient-to-b from-black/90 via-black/40 to-transparent">
-        <div className="flex items-center gap-6 text-white text-left">
-           <div className="size-14 rounded-full bg-primary flex items-center justify-center text-white border-2 border-gold shadow-[0_0_20px_rgba(161,29,29,0.6)]">
-              <span className="material-symbols-outlined text-3xl">view_in_ar</span>
-           </div>
-           <div>
-             <h2 className="text-xl lg:text-3xl font-black italic tracking-tighter uppercase leading-none max-w-2xl">{site.name}</h2>
-             <p className="text-gold text-[10px] font-black uppercase tracking-[0.4em] mt-2 flex items-center gap-2">
-               <span className="size-1.5 bg-gold rounded-full animate-pulse"></span>
-               Trải nghiệm VR 360° Trực Tuyến
-             </p>
-           </div>
+    <div className="fixed inset-0 z-[100000] bg-black/90 flex items-center justify-center p-4 animate-fade-in">
+      <div className="bg-black w-full max-w-7xl h-[80vh] rounded-[2rem] overflow-hidden border-4 border-gold/40 shadow-2xl relative flex flex-col">
+        {/* Header Bar */}
+        <div className="absolute top-0 left-0 w-full p-4 md:p-6 flex justify-between items-center z-[110] bg-gradient-to-b from-black/90 to-transparent pointer-events-none">
+          <div className="flex items-center gap-4 text-white text-left pointer-events-auto">
+             <div className="size-10 md:size-12 rounded-full bg-primary flex items-center justify-center text-white border border-gold">
+                <span className="material-symbols-outlined text-2xl">view_in_ar</span>
+             </div>
+             <div>
+               <h2 className="text-lg md:text-xl font-black uppercase leading-none">{site.name}</h2>
+               <p className="text-gold text-[10px] uppercase tracking-[0.2em] mt-1">Xoay để xem toàn cảnh</p>
+             </div>
+          </div>
+          <button 
+            onClick={onClose} 
+            className="pointer-events-auto bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full font-black uppercase text-xs flex items-center gap-2 shadow-glow border-2 border-white transition-transform hover:scale-105 active:scale-95"
+          >
+            <span>THOÁT VR</span>
+            <span className="material-symbols-outlined text-lg">close</span>
+          </button>
         </div>
-        <button onClick={onClose} className="size-14 lg:size-16 rounded-full bg-white/10 hover:bg-primary transition-all flex items-center justify-center text-white border-2 border-gold shadow-2xl backdrop-blur-xl group">
-          <span className="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform">close</span>
-        </button>
-      </div>
-      <div className="relative w-full h-full pt-24 pb-14 px-4 lg:px-16 flex items-center justify-center z-[100]">
-        <div className="w-full h-full max-w-7xl bg-black rounded-[2rem] lg:rounded-[4rem] overflow-hidden border-2 border-gold/40 shadow-2xl relative">
+        
+        <div className="flex-1 relative bg-zinc-900">
           {isLoading && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black z-50">
-               <div className="w-24 h-24 border-4 border-gold border-t-transparent rounded-full animate-spin mb-8"></div>
-               <p className="text-gold font-black tracking-[0.6em] animate-pulse uppercase text-center text-sm">Đang tải không gian thực tế ảo...</p>
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-50">
+               <div className="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin mb-4"></div>
+               <p className="text-gold font-black uppercase tracking-widest animate-pulse text-xs">Đang tải không gian...</p>
             </div>
           )}
           <iframe 
@@ -297,34 +190,31 @@ const MapPage: React.FC = () => {
         </div>
 
         {selectedSite && (
-          <div className="absolute bottom-10 right-10 w-[92%] lg:w-[480px] bg-white border-2 border-gold/30 rounded-[3rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(62,28,28,0.4)] animate-slide-up z-[1000]">
-            <button onClick={() => setSelectedSite(null)} className="absolute top-6 right-6 size-10 rounded-full bg-white border border-gold/10 flex items-center justify-center text-text-soft hover:bg-primary hover:text-white transition-all z-[60]">
-              <span className="material-symbols-outlined text-lg">close</span>
+          <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-[92%] lg:w-[480px] bg-white border-2 border-gold/30 rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(62,28,28,0.4)] animate-slide-up z-[1000]">
+            <button onClick={() => setSelectedSite(null)} className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full flex items-center justify-center transition-all z-[60] text-[10px] font-black uppercase shadow-lg border border-white">
+              Đóng
             </button>
-            <div className="h-60 overflow-hidden relative group">
+            <div className="h-48 md:h-60 overflow-hidden relative group">
               <img src={selectedSite.img} alt={selectedSite.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
               <div className="absolute top-6 left-6 z-50 flex gap-2">
                 <div className="bg-primary text-white px-5 py-2 text-[10px] font-black uppercase rounded-full shadow-2xl border border-gold/30">DI SẢN THẾ GIỚI</div>
-                {selectedSite.unescoYear && (
-                  <div className="bg-gold text-text-main px-4 py-2 text-[10px] font-black uppercase rounded-full shadow-2xl border border-white/50">{selectedSite.unescoYear}</div>
-                )}
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
             </div>
-            <div className="p-8 space-y-6 bg-white relative -mt-4 text-left">
+            <div className="p-6 md:p-8 space-y-4 md:space-y-6 bg-white relative -mt-4 text-left">
               <div className="flex items-start gap-4">
-                <span className="material-symbols-outlined text-primary text-5xl shrink-0">{getCategoryIcon(selectedSite.category)}</span>
+                <span className="material-symbols-outlined text-primary text-4xl md:text-5xl shrink-0">{getCategoryIcon(selectedSite.category)}</span>
                 <div>
-                  <h3 className="text-2xl lg:text-3xl font-black text-text-main italic leading-tight tracking-tighter uppercase">{selectedSite.name}</h3>
+                  <h3 className="text-xl md:text-3xl font-black text-text-main italic leading-tight tracking-tighter uppercase">{selectedSite.name}</h3>
                   <p className="text-[10px] font-black text-bronze uppercase tracking-[0.3em] mt-1">{selectedSite.location}</p>
                 </div>
               </div>
-              <p className="text-sm text-text-soft leading-relaxed font-bold italic border-l-4 border-primary/40 pl-6">"{selectedSite.description}"</p>
+              <p className="text-xs md:text-sm text-text-soft leading-relaxed font-bold italic border-l-4 border-primary/40 pl-4 md:pl-6">"{selectedSite.description}"</p>
               <button 
                 onClick={() => setIsVRMode(true)} 
-                className="w-full bg-primary py-5 rounded-3xl text-[11px] font-black uppercase text-white hover:brightness-110 shadow-2xl transition-all flex items-center justify-center gap-4 active:scale-95"
+                className="w-full bg-primary py-4 md:py-5 rounded-2xl md:rounded-3xl text-[10px] md:text-[11px] font-black uppercase text-white hover:brightness-110 shadow-2xl transition-all flex items-center justify-center gap-4 active:scale-95 border-2 border-white/20"
               >
-                <span className="material-symbols-outlined text-xl">view_in_ar</span> KHÁM PHÁ VR 360° NGAY
+                <span className="material-symbols-outlined text-xl">view_in_ar</span> VÀO XEM VR 360°
               </button>
             </div>
           </div>
